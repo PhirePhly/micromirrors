@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<direct>
+  <rule ipv="ipv4" table="mangle" chain="OUTPUT" priority="0">-j DSCP --set-dscp-class CS1</rule>
+  <rule ipv="ipv6" table="mangle" chain="OUTPUT" priority="0">-j DSCP --set-dscp-class CS1</rule>
+</direct>
+

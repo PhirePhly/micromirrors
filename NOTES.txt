@@ -1,0 +1,4 @@
+sudo mkdir /data
+sudo chown mirror:mirror /data
+sudo chcon -v --type=httpd_sys_content_t /data
+

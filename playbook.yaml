@@ -1,0 +1,80 @@
+---
+
+- hosts: all
+  become: true
+  remote_user: mirror
+
+  tasks:
+    - name: Enable EPEL
+      dnf:
+        name: epel-release
+        state: latest
+
+    - name: Install required software
+      dnf:
+        state: present
+        name:
+          - certbot
+          - dstat
+          - duperemove
+          - '@nginx:1.20/common'
+          - python3-certbot-nginx
+          - rsync
+          - screen
+          - smartmontools
+          - vim
+          - whois
+
+    - name: Update all software
+      dnf:
+        state: latest
+        name: "*"
+
+    - name: Install KWF SSH keys
+      authorized_key:
+        user: mirror
+        state: present
+        key: https://github.com/phirephly.keys
+
+    - name: Install Johns SSH keys
+      authorized_key:
+        user: mirror
+        state: present
+        key: https://github.com/warthog9.keys
+
+    - name: Configure Nginx
+      template:
+        src: templates/nginx.conf
+        dest: /etc/nginx/nginx.conf
+      notify:
+        - reload nginx
+
+    - name: Open ports in firewall
+      ansible.posix.firewalld:
+        service: "{{ item }}"
+        permanent: yes
+        immediate: yes
+        state: enabled
+      with_items:
+        - http
+        - https
+        - rsyncd
+
+    - name: Set DSCP mangle rules on firewall
+      copy:
+        src: files/firewalld.direct.xml
+        dest: /etc/firewalld/direct.xml
+      notify: reload firewalld
+
+
+  handlers:
+    - name: reload nginx
+      service:
+        name: nginx
+        state: reloaded
+
+    - name: reload firewalld
+      service:
+        name: firewalld
+        state: reloaded
+
