@@ -1,0 +1,8 @@
+---
+
+hostedprojects:
+  - almalinux
+  - centos
+  - epel
+  - manjaro
+

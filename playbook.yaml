@@ -66,6 +66,12 @@
         dest: /etc/firewalld/direct.xml
       notify: reload firewalld
 
+    - name: Install Update Script
+      template:
+        src: templates/update-mirror.sh
+        dest: /usr/local/bin/update-mirror.sh
+        mode: '0755'
+
 
   handlers:
     - name: reload nginx
