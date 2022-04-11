@@ -72,6 +72,20 @@
         dest: /usr/local/bin/update-mirror.sh
         mode: '0755'
 
+    - name: Create Mirror Log Dir
+      file:
+        path: /var/log/mirror
+        state: directory
+        owner: mirror
+        group: mirror
+
+    - name: Create Mirror Lock Dir
+      file:
+        path: /home/mirror/lock
+        state: directory
+        owner: mirror
+        group: mirror
+
 
   handlers:
     - name: reload nginx

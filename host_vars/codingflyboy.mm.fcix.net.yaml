@@ -2,7 +2,9 @@
 
 hostedprojects:
   - almalinux
-  - centos
+  - archlinux
   - epel
   - manjaro
+  - rocky
+  - opensuse
 

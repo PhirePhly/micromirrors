@@ -7,13 +7,14 @@
 
 UPSTREAM="mirror.fcix.net"
 LOGDIR="/var/log/mirror"
-
+LOCKDIR="/home/mirror/lock"
 
 
 PROJECT=""
 FLOCK_ARGS=""
 
 if [[ -z $1 ]]; then
+	# If run without arguments, update all projects but skip any that are locked
 	PROJECT="all"
 	FLOCK_ARGS="-w 5"
 elif [[ $1 = "all" ]]; then
@@ -46,19 +47,143 @@ LOGFILE="$LOGDIR/mirror.`date '+%Y%m%d%H%M%S'`.$PROJECT.log"
 exec 1>$LOGFILE
 exec 2>&1
 
-update_almalinux() {
-	exec {lock_fd}>/run/lock/mirror.almalinux
-	flock $FLOCK_ARGS "$lock_fd" || return
-	echo "Updating Alma Linux"
-	sleep 30
-	echo "Done updating Alma Linux"
-	flock -u "$lock_fd"
-}
+
 
 
 {% if "almalinux" in hostedprojects %}
+update_almalinux() {
+	exec {lock_fd}>$LOCKDIR/mirror.almalinux
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING ALMA LINUX ###\n"
+	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/almalinux/ /data/mirror/almalinux/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "almalinux" ]]; then
 	update_almalinux
 fi
 
 {% endif %}
+{% if "archlinux" in hostedprojects %}
+update_archlinux() {
+	exec {lock_fd}>$LOCKDIR/mirror.archlinux
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING ARCH LINUX ###\n"
+	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/archlinux/ /data/mirror/archlinux/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "archlinux" ]]; then
+	update_archlinux
+fi
+
+{% endif %}
+{% if "centos" in hostedprojects %}
+update_centos() {
+	exec {lock_fd}>$LOCKDIR/mirror.centos
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING CENTOS ###\n"
+	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/centos/ /data/mirror/centos/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "centos" ]]; then
+	update_centos
+fi
+
+{% endif %}
+{% if "centos-altarch" in hostedprojects %}
+update_centos-altarch() {
+	exec {lock_fd}>$LOCKDIR/mirror.centos-altarch
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING CENTOS ALTARCH ###\n"
+	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/centos-altarch/ /data/mirror/centos-altarch/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "centos-altarch" ]]; then
+	update_centos-altarch
+fi
+
+{% endif %}
+{% if "centos-stream" in hostedprojects %}
+update_centos-stream() {
+	exec {lock_fd}>$LOCKDIR/mirror.centos-stream
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING CENTOS STREAM ###\n"
+	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/centos-stream/ /data/mirror/centos-stream/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "centos-stream" ]]; then
+	update_centos-stream
+fi
+
+{% endif %}
+{% if "epel" in hostedprojects %}
+update_epel() {
+	exec {lock_fd}>$LOCKDIR/mirror.epel
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING EPEL ###\n"
+	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/epel/ /data/mirror/epel/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "epel" ]]; then
+	update_epel
+fi
+
+{% endif %}
+{% if "manjaro" in hostedprojects %}
+update_manjaro() {
+	exec {lock_fd}>$LOCKDIR/mirror.manjaro
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING MANJARO ###\n"
+	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/manjaro/ /data/mirror/manjaro/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "manjaro" ]]; then
+	update_manjaro
+fi
+
+{% endif %}
+{% if "opensuse" in hostedprojects %}
+update_opensuse() {
+	exec {lock_fd}>$LOCKDIR/mirror.opensuse
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING OPENSUSE TUMBLEWEED ###\n"
+	mkdir -p /data/mirror/opensuse/tumbleweed
+	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/opensuse/tumbleweed/ /data/mirror/opensuse/tumbleweed/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "opensuse" ]]; then
+	update_opensuse
+fi
+
+{% endif %}
+{% if "rocky" in hostedprojects %}
+update_rocky() {
+	exec {lock_fd}>$LOCKDIR/mirror.rocky
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING ROCKY ###\n"
+	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/rocky/ /data/mirror/rocky/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "rocky" ]]; then
+	update_rocky
+fi
+
+{% endif %}
+
