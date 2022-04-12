@@ -20,6 +20,7 @@
           - '@nginx:1.20/common'
           - python3-certbot-nginx
           - rsync
+          - rsync-daemon
           - screen
           - smartmontools
           - vim
@@ -85,6 +86,17 @@
         state: directory
         owner: mirror
         group: mirror
+
+    - name: Configure Rsyncd
+      template:
+        src: templates/rsyncd.conf
+        dest: /etc/rsyncd.conf
+
+    - name: Enable rsyncd
+      service:
+        name: rsyncd
+        state: started
+        enabled: yes
 
 
   handlers:
