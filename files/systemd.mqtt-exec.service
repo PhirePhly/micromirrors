@@ -1,0 +1,14 @@
+[Unit]
+Description=MQTT Message consumer for software updates
+Requires=network.target network-online.target
+After=network.target network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/mqtt-exec -h mirror.fcix.net -t 'rsync/mirror.fcix.net/#' -v -- /usr/local/bin/update-mirror.sh
+Restart=always
+RestartSec=15
+
+[Install]
+WantedBy=multi-user.target
+

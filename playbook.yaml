@@ -17,6 +17,7 @@
           - certbot
           - dstat
           - duperemove
+          - mosquitto
           - '@nginx:1.20/common'
           - python3-certbot-nginx
           - rsync
@@ -97,6 +98,24 @@
         name: rsyncd
         state: started
         enabled: yes
+
+    - name: Install mqtt-exec
+      copy:
+        src: files/mqtt-exec
+        dest: /usr/local/bin/mqtt-exec
+        mode: '0755'
+
+    - name: Install mqtt-exec service unit
+      copy:
+        src: files/systemd.mqtt-exec.service
+        dest: /etc/systemd/system/mqtt-exec.service
+
+    - name: Enable mqtt-exec service
+      systemd:
+        name: mqtt-exec.service
+        state: started
+        enabled: yes
+
 
 
   handlers:
