@@ -4,13 +4,13 @@ An Ansible playbook to configure a Linux software mirror ready to be added to th
 
 This project spawned as a thought experiment while working on the [FCIX mirror](https://mirror.fcix.net/) as to how software mirrors seem to always scale veritcally, and if it would be possible to build a meaningfully useful mirror for less than the $320 cost of one of the 16TB hard drives being used in the FCIX mirror.
 
-Given this constrant of a hardware budget of $320, servers would be cheap and small enough that a larger number of them could be built and deployed to make a more distributed CDN that is less reliant on single hosts for capacity.
+Given this constraint of a hardware budget of $320, servers would be cheap and small enough that a larger number of them could be built and deployed to make a more distributed CDN that is less reliant on single hosts for capacity.
 This objective also meshes well with the fact that the two of us working on this project happen to have a large number of personal contacts at "eyeball ISPs", which are the ISPs used by consumers to get Internet at home.
 Eyeball ISPs handle primarily ingress traffic for their users consuming Internet content, so their equal egress capacity on the transit market chronically tends to be under-utilized.
 A mirror server that was negligibly small and low power would mean the hosts could stick the servers in their transit DC locations to utilize their surplus egress capacity at effectively no expense.
 
 Each server would only be capable of hosting a small number of the relatively smaller projects (i.e. 3-6 of the 100GB-400GB projects).
-This would mesh well with micro mirrors only have a 1Gbps NIC, making it an easier position to deploy one of these nodes since 1G ports on routers tend to not be in short supply and the risk of a single server pumping out 1Gbps of traffic seems less daunting than a higher capacity network port.
+This would mesh well with micro mirrors only have a 1Gbps NIC, making it an easier proposition to deploy one of these nodes since 1G ports on routers tend to not be in short supply and the risk of a single server pumping out 1Gbps of traffic seems less daunting than a higher capacity network port.
 
 ## Hosting Sponsor Requirements
 
