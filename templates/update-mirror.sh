@@ -13,30 +13,50 @@ LOCKDIR="/home/mirror/lock"
 PROJECT=""
 FLOCK_ARGS=""
 
+find $LOGDIR -mtime +2 -name "*.log" -delete
+
 if [[ -z $1 ]]; then
 	# If run without arguments, update all projects but skip any that are locked
 	PROJECT="all"
 	FLOCK_ARGS="-w 5"
 elif [[ $1 = "all" ]]; then
 	PROJECT="all"
+{% if "almalinux" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/almalinux" ]]; then
 	PROJECT="almalinux"
+{% endif %}
+{% if "archlinux" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/archlinux" ]]; then
 	PROJECT="archlinux"
+{% endif %}
+{% if "centos" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/centos" ]]; then
 	PROJECT="centos"
+{% endif %}
+{% if "centos-altarch" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/centos-altarch" ]]; then
 	PROJECT="centos-altarch"
+{% endif %}
+{% if "centos-stream" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/centos-stream" ]]; then
 	PROJECT="centos-stream"
+{% endif %}
+{% if "epel" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/epel" ]]; then
 	PROJECT="epel"
+{% endif %}
+{% if "manjaro" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/manjaro" ]]; then
 	PROJECT="manjaro"
+{% endif %}
+{% if "opensuse" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/opensuse" ]]; then
 	PROJECT="opensuse"
+{% endif %}
+{% if "rocky" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/rocky" ]]; then
 	PROJECT="rocky"
+{% endif %}
 else
 	# We don't understand the project invoked
 	exit 1

@@ -20,6 +20,7 @@
           - mosquitto
           - '@nginx:1.20/common'
           - python3-certbot-nginx
+          - python3-policycoreutils
           - rsync
           - rsync-daemon
           - screen
@@ -31,6 +32,10 @@
       dnf:
         state: latest
         name: "*"
+
+    - name: Set timezone
+      timezone:
+        name: America/Los_Angeles
 
     - name: Install KWF SSH keys
       authorized_key:
@@ -44,12 +49,29 @@
         state: present
         key: https://github.com/warthog9.keys
 
+    - name: Install LetsEncrypt Config
+      copy:
+        src: files/options-ssl-nginx.conf
+        dest: /etc/letsencrypt/options-ssl-nginx.conf
+
     - name: Configure Nginx
       template:
         src: templates/nginx.conf
         dest: /etc/nginx/nginx.conf
       notify:
         - reload nginx
+
+    - name: Install Nginx index template
+      template:
+        src: templates/autoindex.xslt
+        dest: /usr/share/nginx/html/autoindex.xslt
+      notify:
+        - reload nginx
+
+    - name: Install HTTP Favicon
+      copy:
+        src: files/favicon.ico
+        dest: /usr/share/nginx/html/favicon.ico
 
     - name: Open ports in firewall
       ansible.posix.firewalld:
@@ -58,6 +80,7 @@
         immediate: yes
         state: enabled
       with_items:
+        - ssh
         - http
         - https
         - rsyncd
@@ -68,11 +91,29 @@
         dest: /etc/firewalld/direct.xml
       notify: reload firewalld
 
+    - name: Copy over sysctl IP stack optimizations
+      copy:
+        src: files/sysctl.performancetune.conf
+        dest: /etc/sysctl.d/50-performancetune.conf
+
     - name: Install Update Script
       template:
         src: templates/update-mirror.sh
         dest: /usr/local/bin/update-mirror.sh
         mode: '0755'
+
+    - name: Create Mirror Data Dir
+      file:
+        path: /data/mirror
+        state: directory
+        owner: mirror
+        group: mirror
+
+    - name: Set SE type on mirror data dir
+      sefcontext:
+        target: "/data/mirror"
+        setype: "public_content_t"
+        state: present
 
     - name: Create Mirror Log Dir
       file:

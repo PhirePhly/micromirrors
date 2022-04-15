@@ -1,0 +1,20 @@
+---
+
+- hosts: all
+  become: true
+  remote_user: mirror
+
+  tasks:
+    - name: Install Nginx index template
+      template:
+        src: templates/autoindex.xslt
+        dest: /usr/share/nginx/html/autoindex.xslt
+      notify:
+        - reload nginx
+
+  handlers:
+    - name: reload nginx
+      service:
+        name: nginx
+        state: reloaded
+
