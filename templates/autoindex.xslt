@@ -117,7 +117,7 @@
      <th width="115px">Modified</th>
    </tr>
    <tr>
-	   <td><a href="../"> ⮬ Parent Directory</a></td>
+	   <td><a href="../"> ^ Parent Directory</a></td>
      <td></td>
      <td></td>
    </tr>

@@ -8,3 +8,5 @@ hostedprojects:
   - rocky
   - centos
 
+tls_setup: True
+

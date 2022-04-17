@@ -49,11 +49,6 @@
         state: present
         key: https://github.com/warthog9.keys
 
-    - name: Install LetsEncrypt Config
-      copy:
-        src: files/options-ssl-nginx.conf
-        dest: /etc/letsencrypt/options-ssl-nginx.conf
-
     - name: Configure Nginx
       template:
         src: templates/nginx.conf
@@ -95,12 +90,18 @@
       copy:
         src: files/sysctl.performancetune.conf
         dest: /etc/sysctl.d/50-performancetune.conf
+      notify: reload sysctl
 
     - name: Install Update Script
       template:
         src: templates/update-mirror.sh
         dest: /usr/local/bin/update-mirror.sh
         mode: '0755'
+
+    - name: Schedule update script and duperemove
+      copy:
+        src: files/cron.d/updatemirror
+        dest: /etc/cron.d/updatemirror
 
     - name: Create Mirror Data Dir
       file:
@@ -170,3 +171,5 @@
         name: firewalld
         state: reloaded
 
+    - name: reload sysctl
+      command: sysctl -p
