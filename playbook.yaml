@@ -112,9 +112,10 @@
 
     - name: Set SE type on mirror data dir
       sefcontext:
-        target: "/data/mirror"
+        target: "/data/mirror(/.*)?"
         setype: "public_content_t"
         state: present
+      notify: restorecon
 
     - name: Create Mirror Log Dir
       file:
@@ -173,3 +174,7 @@
 
     - name: reload sysctl
       command: sysctl -p
+
+    - name: restorecon
+      command: restorecon -ir /data/mirror
+
