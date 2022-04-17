@@ -28,43 +28,17 @@ Additional nice to have features would be:
 
 The Micro Mirrors all carry SPONSOR.mm.fcix.net URLs, such that the host sponsor can get their name and visiblity on the project mirror lists, but it is still hopefully clear that any issues with the mirror should be raised with the FCIX NOC and not the hosting network's support team.
 
-## Rev 1 Hardware Design
+## Project Registrations
 
-* HP T620 Thin Client - $20 eBay
-* HP T620 power supply - $11 eBay
-* 2x4GB DDR3 PC3L SODIMM - $20 eBay
-* 2TB M.2 SATA SSD - $160 eBay
+Each project has a unique workflow for registering new mirrors.
 
-The [HP T620](https://www.parkytowers.me.uk/thin/hp/t620/) is a fanless thin client with the following specs:
-
-* AMD GX-415GA quad core SOC, 1.5GHz
-* Standard 19V HP power input barrel
-* Two DDR3 SODIMM slots
-* One M.2 B key SATA slot supporting 2242, 2260, and 2280 SSDs.
-* One 1GbaseT NIC
-* Four external USB2 and two USB3 ports
-* Two internal USB ports
-* Approx 11W power consumption
-
-## Provisioning Checklist
-
-Ensure BIOS is configured to power on after power loss.
-
-Assemble hardware and install Alma 8 with following settings:
-* No root user
-* User `mirror` as an administrator
-* No LVM, Standard partition table with one large `/` XFS partition
-* Minimal software configuration
-
-Once booted into the new install:
-* Edit `/etc/sysconfig/network-scripts/ifcfg-enp1s0` to have correct IP addresses
-* `sudo visudo` to change wheel group to have NOPASSWD:ALL
-
-Add the host to the Ansible inventory, and create a host_vars file for the system selecting the desired projects for this micro mirror.
-
-Identify upstream rsync sources for each project, and contact them for ACL access if needed.
-
-Run playbook and wait for system to pull in full project repo. Ensure that automatic update scripts are running correctly.
-
-Contact projects requesting that the new mirror be added to their load balancers.
+* [Almalinux](https://wiki.almalinux.org/Mirrors.html)
+* [ArchLinux](https://wiki.archlinux.org/title/DeveloperWiki:NewMirrors)
+* [CentOS](https://wiki.centos.org/HowTos/CreatePublicMirrors)
+* [CentOS-altarch](https://wiki.centos.org/HowTos/CreatePublicMirrors)
+* [CentOS-Stream](https://wiki.centos.org/HowTos/CreatePublicMirrors)
+* [EPEL](https://fedoraproject.org/wiki/Infrastructure/Mirroring)
+* [Manjaro](https://wiki.manjaro.org/index.php/Manjaro_Mirrors) (email info@manjaro.org)
+* [OpenSUSE](https://en.opensuse.org/openSUSE:Mirror_infrastructure)
+* [Rocky](https://docs.rockylinux.org/guides/mirror_management/add_mirror_manager/)
 
