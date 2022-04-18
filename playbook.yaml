@@ -68,6 +68,11 @@
         src: files/favicon.ico
         dest: /usr/share/nginx/html/favicon.ico
 
+    - name: Install HTTP Robots.txt
+      copy:
+        src: files/robots.txt
+        dest: /usr/share/nginx/html/robots.txt
+
     - name: Open ports in firewall
       ansible.posix.firewalld:
         service: "{{ item }}"
