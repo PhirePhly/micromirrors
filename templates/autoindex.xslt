@@ -91,7 +91,7 @@
  <body>
    <div style="margin-left:15px;margin-top:10px;font-size:15pt">
    <p>
-	   This is an FCIX Micro Mirror node. It is a low power software mirror that serves a small number of projects. Pulls all updates from <a href="http://mirror.fcix.net/">the main FCIX Mirror</a>. To learn more about this, talk to Kenneth or John.
+	   This is an FCIX Micro Mirror node. It is a low power software mirror that serves a small number of projects. To learn more about this, talk to Kenneth Finnegan or John Hawley.
    </p>
    <b>
    Index of <xsl:value-of select="$cpath"/>
@@ -101,7 +101,7 @@
     <xsl:apply-templates/>
    </center>
    <div style="margin-left:15px;font-size:15pt">
-	   This mirror is hosted by CodingFlyBoy. Thanks buddy!
+	   This mirror is hosted by <a href="{{ site_sponsor_url }}">{{ site_sponsor }}</a>.
    </div>
    <br/>
  </body>
