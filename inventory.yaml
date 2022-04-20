@@ -3,4 +3,4 @@
 MIRROR:
   hosts:
     codingflyboy.mm.fcix.net:
-      ansible_host: codingflyboy.mm.fcix.net
+    ridgewireless.mm.fcix.net:

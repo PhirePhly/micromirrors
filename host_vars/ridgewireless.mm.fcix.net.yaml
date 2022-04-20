@@ -1,0 +1,13 @@
+---
+
+hostedprojects:
+  - almalinux
+  - archlinux
+  - epel
+  - manjaro
+  - rocky
+
+tls_setup: False
+site_sponsor: "Ridge Wireless"
+site_sponsor_url: "https://ridgewireless.net/"
+

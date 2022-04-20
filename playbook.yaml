@@ -73,23 +73,23 @@
         src: files/robots.txt
         dest: /usr/share/nginx/html/robots.txt
 
-    - name: Open ports in firewall
-      ansible.posix.firewalld:
-        service: "{{ item }}"
-        permanent: yes
-        immediate: yes
-        state: enabled
-      with_items:
-        - ssh
-        - http
-        - https
-        - rsyncd
-
-    - name: Set DSCP mangle rules on firewall
+    - name: Configure nftables firewall
       copy:
-        src: files/firewalld.direct.xml
-        dest: /etc/firewalld/direct.xml
-      notify: reload firewalld
+        src: files/nftables.conf
+        dest: /etc/sysconfig/nftables.conf
+      notify: reload firewall
+
+    - name: Disable firewalld
+      service:
+        name: firewalld
+        state: stopped
+        enabled: no
+
+    - name: Enable nftables
+      service:
+        name: nftables
+        state: started
+        enabled: yes
 
     - name: Copy over sysctl IP stack optimizations
       copy:
@@ -172,9 +172,9 @@
         name: nginx
         state: reloaded
 
-    - name: reload firewalld
+    - name: reload firewall
       service:
-        name: firewalld
+        name: nftables
         state: reloaded
 
     - name: reload sysctl
