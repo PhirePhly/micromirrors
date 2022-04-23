@@ -5,7 +5,7 @@ hostedprojects:
   - archlinux
   - epel
   - manjaro
-  - centos
+  - opensuse
 
 tls_setup: True
 site_sponsor: "CodingFlyBoy"
