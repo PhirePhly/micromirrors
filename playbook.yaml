@@ -17,6 +17,7 @@
           - certbot
           - dstat
           - duperemove
+          - lldpd
           - mosquitto
           - '@nginx:1.20/common'
           - python3-certbot-nginx
@@ -161,6 +162,12 @@
     - name: Enable mqtt-exec service
       systemd:
         name: mqtt-exec.service
+        state: started
+        enabled: yes
+
+    - name: Enable LLDP
+      service:
+        name: lldpd
         state: started
         enabled: yes
 
