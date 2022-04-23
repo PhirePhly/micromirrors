@@ -57,6 +57,10 @@ elif [[ $1 = "rsync/$UPSTREAM/opensuse" ]]; then
 elif [[ $1 = "rsync/$UPSTREAM/rocky" ]]; then
 	PROJECT="rocky"
 {% endif %}
+{% if "ubuntu-releases" in hostedprojects %}
+elif [[ $1 = "rsync/$UPSTREAM/ubuntu-releases" ]]; then
+	PROJECT="ubuntu-releases"
+{% endif %}
 else
 	# We don't understand the project invoked
 	exit 1
@@ -203,6 +207,21 @@ update_rocky() {
 
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "rocky" ]]; then
 	update_rocky
+fi
+
+{% endif %}
+{% if "ubuntu-releases" in hostedprojects %}
+update_ubuntu_releases() {
+	exec {lock_fd}>$LOCKDIR/mirror.ubuntu-releases
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING UBUNTU-RELEASES ###\n"
+	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/ubuntu-releases/ /data/mirror/ubuntu-releases/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "ubuntu-releases" ]]; then
+	update_ubuntu_releases
 fi
 
 {% endif %}
