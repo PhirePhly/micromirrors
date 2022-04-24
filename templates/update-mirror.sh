@@ -12,6 +12,7 @@ LOCKDIR="/home/mirror/lock"
 
 PROJECT=""
 FLOCK_ARGS=""
+RSYNC_ARGS=(-avSH '--filter=R .~tmp~' --delete-delay --delay-updates --bwlimit=25M)
 
 find $LOGDIR -mtime +2 -name "*.log" -delete
 
@@ -79,7 +80,7 @@ update_almalinux() {
 	exec {lock_fd}>$LOCKDIR/mirror.almalinux
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING ALMA LINUX ###\n"
-	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/almalinux/ /data/mirror/almalinux/
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/almalinux/ /data/mirror/almalinux/
 	sleep 10
 	flock -u "$lock_fd"
 }
@@ -94,7 +95,7 @@ update_archlinux() {
 	exec {lock_fd}>$LOCKDIR/mirror.archlinux
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING ARCH LINUX ###\n"
-	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/archlinux/ /data/mirror/archlinux/
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/archlinux/ /data/mirror/archlinux/
 	sleep 10
 	flock -u "$lock_fd"
 }
@@ -109,7 +110,7 @@ update_centos() {
 	exec {lock_fd}>$LOCKDIR/mirror.centos
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING CENTOS ###\n"
-	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/centos/ /data/mirror/centos/
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/centos/ /data/mirror/centos/
 	sleep 10
 	flock -u "$lock_fd"
 }
@@ -124,7 +125,7 @@ update_centos-altarch() {
 	exec {lock_fd}>$LOCKDIR/mirror.centos-altarch
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING CENTOS ALTARCH ###\n"
-	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/centos-altarch/ /data/mirror/centos-altarch/
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/centos-altarch/ /data/mirror/centos-altarch/
 	sleep 10
 	flock -u "$lock_fd"
 }
@@ -139,7 +140,7 @@ update_centos-stream() {
 	exec {lock_fd}>$LOCKDIR/mirror.centos-stream
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING CENTOS STREAM ###\n"
-	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/centos-stream/ /data/mirror/centos-stream/
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/centos-stream/ /data/mirror/centos-stream/
 	sleep 10
 	flock -u "$lock_fd"
 }
@@ -154,7 +155,7 @@ update_epel() {
 	exec {lock_fd}>$LOCKDIR/mirror.epel
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING EPEL ###\n"
-	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/epel/ /data/mirror/epel/
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/epel/ /data/mirror/epel/
 	sleep 10
 	flock -u "$lock_fd"
 }
@@ -169,7 +170,7 @@ update_manjaro() {
 	exec {lock_fd}>$LOCKDIR/mirror.manjaro
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING MANJARO ###\n"
-	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/manjaro/ /data/mirror/manjaro/
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/manjaro/ /data/mirror/manjaro/
 	sleep 10
 	flock -u "$lock_fd"
 }
@@ -185,7 +186,7 @@ update_opensuse() {
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING OPENSUSE TUMBLEWEED ###\n"
 	mkdir -p /data/mirror/opensuse/tumbleweed
-	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/opensuse/tumbleweed/ /data/mirror/opensuse/tumbleweed/
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/opensuse/tumbleweed/ /data/mirror/opensuse/tumbleweed/
 	sleep 10
 	flock -u "$lock_fd"
 }
@@ -200,7 +201,7 @@ update_rocky() {
 	exec {lock_fd}>$LOCKDIR/mirror.rocky
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING ROCKY ###\n"
-	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/rocky/ /data/mirror/rocky/
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/rocky/ /data/mirror/rocky/
 	sleep 10
 	flock -u "$lock_fd"
 }
@@ -215,7 +216,7 @@ update_ubuntu_releases() {
 	exec {lock_fd}>$LOCKDIR/mirror.ubuntu-releases
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING UBUNTU-RELEASES ###\n"
-	rsync -avSH -f 'R .~tmp~' --delete-delay --delay-updates rsync://$UPSTREAM/ubuntu-releases/ /data/mirror/ubuntu-releases/
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/ubuntu-releases/ /data/mirror/ubuntu-releases/
 	sleep 10
 	flock -u "$lock_fd"
 }
