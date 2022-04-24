@@ -6,6 +6,7 @@ hostedprojects:
   - epel
   - manjaro
   - opensuse
+  - ubuntu-releases
 
 tls_setup: True
 site_sponsor: "CodingFlyBoy"
