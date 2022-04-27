@@ -12,6 +12,18 @@ A mirror server that was negligibly small and low power would mean the hosts cou
 Each server would only be capable of hosting a small number of the relatively smaller projects (i.e. 3-6 of the 100GB-400GB projects).
 This would mesh well with micro mirrors only have a 1Gbps NIC, making it an easier proposition to deploy one of these nodes since 1G ports on routers tend to not be in short supply and the risk of a single server pumping out 1Gbps of traffic seems less daunting than a higher capacity network port.
 
+## Initial Experiment
+
+Given this thesis that micro mirrors may be helpful to distros, we're building an initial fleet of them based on HP T620 thin clients with 8GB RAM / 2TB M.2 SATA SSDs in them.
+The design is detailed in the `hardware/` folder, but the BOM cost for parts off ebay works out to roughly $220 each.
+
+With these nodes, we're deploying them in a select number of sites with the objective of a single node per hosting AS and a single node per physical building, to try and distribute the fault domain of these mirrors.
+
+To avoid increasing the rsync load on upstream mirrors, all of these micromirrors are pulling updates from the mirror.fcix.net "heavy iron" mirror.
+This is handled with MQTT push messages for when repos have been updated (an idea taken from the Alpine linux distro) and each rsync transfer paced at 200Mbps to try and limit the ingress load on hosting networks, and to try and encourage multiple micromirrors to operate in lockstep as they get mirror.fcix.net to read files from disk and serve to all the requesting micromirrors.
+
+Given the limited processing power of these micromirrors, telemetry will be pushed to a separate watchtower server to collect, store, and analyze the aggregate statistics of the constellation of Micro Mirrors.
+
 ## Hosting Sponsor Requirements
 
 The sponsors of the Micro Mirrors would generally be any sort of network with a DC presence, surplus egress capacity, and a lack of manpower or inclination to host and manage their own open source software mirror.
