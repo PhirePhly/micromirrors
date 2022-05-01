@@ -57,13 +57,6 @@
       notify:
         - reload nginx
 
-    - name: Install Nginx index template
-      template:
-        src: templates/autoindex.xslt
-        dest: /usr/share/nginx/html/autoindex.xslt
-      notify:
-        - reload nginx
-
     - name: Install HTTP Favicon
       copy:
         src: files/favicon.ico

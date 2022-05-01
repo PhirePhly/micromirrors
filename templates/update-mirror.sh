@@ -43,8 +43,8 @@ elif [[ $1 = "rsync/$UPSTREAM/centos-stream" ]]; then
 	PROJECT="centos-stream"
 {% endif %}
 {% if "epel" in hostedprojects %}
-elif [[ $1 = "rsync/$UPSTREAM/epel" ]]; then
-	PROJECT="epel"
+elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
+	PROJECT="fedora"
 {% endif %}
 {% if "manjaro" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/manjaro" ]]; then
@@ -155,12 +155,12 @@ update_epel() {
 	exec {lock_fd}>$LOCKDIR/mirror.epel
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING EPEL ###\n"
-	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/epel/ /data/mirror/epel/
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/fedora-epel/ /data/mirror/epel/
 	sleep 10
 	flock -u "$lock_fd"
 }
 
-if [[ $PROJECT = "all" ]] || [[ $PROJECT = "epel" ]]; then
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "fedora" ]]; then
 	update_epel
 fi
 
