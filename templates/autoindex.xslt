@@ -91,7 +91,7 @@
  <body>
    <div style="margin-left:15px;margin-top:10px;font-size:15pt">
    <p>
-	   This is an FCIX Micro Mirror node. It is a low power software mirror that serves a small number of projects. To learn more about this, talk to Kenneth Finnegan or John Hawley.
+	   This is an FCIX Micro Mirror node hosted by <a href="{{ site_sponsor_url }}">{{ site_sponsor }}</a>.
    </p>
    <b>
    Index of <xsl:value-of select="$cpath"/>
@@ -101,7 +101,8 @@
     <xsl:apply-templates/>
    </center>
    <div style="margin-left:15px;font-size:15pt">
-	   This mirror is hosted by <a href="{{ site_sponsor_url }}">{{ site_sponsor }}</a>.
+     Micro Mirrors are low power free software mirrors that serve a small number of projects from across the Internet.
+     To learn more about this, talk to Kenneth Finnegan or John Hawley or check out the <a href="https://github.com/PhirePhly/micromirrors">README on Github</a>.
    </div>
    <br/>
  </body>
