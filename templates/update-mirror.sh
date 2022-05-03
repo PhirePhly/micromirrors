@@ -186,6 +186,7 @@ update_opensuse() {
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING OPENSUSE TUMBLEWEED ###\n"
 	mkdir -p /data/mirror/opensuse/tumbleweed
+	rsync -avSH '--filter=R .~tmp~' --no-links --delay-updates --bwlimit=25M rsync://$UPSTREAM/opensuse/tumbleweed/ /data/mirror/opensuse/tumbleweed/
 	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/opensuse/tumbleweed/ /data/mirror/opensuse/tumbleweed/
 	sleep 10
 	flock -u "$lock_fd"
