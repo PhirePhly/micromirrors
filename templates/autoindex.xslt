@@ -171,5 +171,8 @@
    </tr>
   </xsl:template>
 
+  <xsl:template match="other" name="other">
+  </xsl:template>
+
 </xsl:stylesheet>
 
