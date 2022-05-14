@@ -54,6 +54,10 @@ elif [[ $1 = "rsync/$UPSTREAM/manjaro" ]]; then
 elif [[ $1 = "rsync/$UPSTREAM/opensuse" ]]; then
 	PROJECT="opensuse"
 {% endif %}
+{% if "raspbian" in hostedprojects %}
+elif [[ $1 = "rsync/$UPSTREAM/raspbian" ]]; then
+	PROJECT="raspbian"
+{% endif %}
 {% if "rocky" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/rocky" ]]; then
 	PROJECT="rocky"
@@ -194,6 +198,22 @@ update_opensuse() {
 
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "opensuse" ]]; then
 	update_opensuse
+fi
+
+{% endif %}
+{% if "raspbian" in hostedprojects %}
+update_raspbian() {
+	exec {lock_fd}>$LOCKDIR/mirror.raspbian
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING RASPBIAN ###\n"
+	rsync --recursive -v --times --links --safe-links --hard-links --stats --exclude 'Packages*' --exclude 'Sources*' --exclude 'Release*' --exclude 'InRelease' rsync://$UPSTREAM/raspbian/ /data/mirror/raspbian/
+	rsync --recursive -v --times --links --safe-links --hard-links --stats --delete --delete-after rsync://$UPSTREAM/raspbian/ /data/mirror/raspbian/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "raspbian" ]]; then
+	update_raspbian
 fi
 
 {% endif %}
