@@ -4,8 +4,8 @@ hostedprojects:
   - almalinux
   - archlinux
   - epel
+  - fedora-amd64
   - manjaro
-  - rocky
 
 tls_setup: False
 site_sponsor: "Ridge Wireless"

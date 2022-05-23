@@ -46,6 +46,10 @@ elif [[ $1 = "rsync/$UPSTREAM/centos-stream" ]]; then
 elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
 	PROJECT="fedora"
 {% endif %}
+{% if "fedora-amd64" in hostedprojects %}
+elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
+	PROJECT="fedora"
+{% endif %}
 {% if "manjaro" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/manjaro" ]]; then
 	PROJECT="manjaro"
@@ -166,6 +170,21 @@ update_epel() {
 
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "fedora" ]]; then
 	update_epel
+fi
+
+{% endif %}
+{% if "fedora-amd64" in hostedprojects %}
+update_fedora() {
+	exec {lock_fd}>$LOCKDIR/mirror.fedora
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING FEDORA AMD64 ###\n"
+	rsync -avSH --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/armhfp/**' --exclude '**/aarch64/**' --exclude '**/debug/**' --exclude '**/test/**' --exclude '**/testing/**' --delete-excluded --bwlimit=25M rsync://$UPSTREAM/fedora-buffet/fedora/ /data/mirror/fedora/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "fedora" ]]; then
+	update_fedora
 fi
 
 {% endif %}

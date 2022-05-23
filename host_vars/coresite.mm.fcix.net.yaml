@@ -1,0 +1,9 @@
+---
+
+hostedprojects:
+  - ubuntu-releases
+
+tls_setup: False
+site_sponsor: "CoreSite"
+site_sponsor_url: "https://www.coresite.com/"
+

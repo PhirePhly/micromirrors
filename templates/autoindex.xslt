@@ -163,7 +163,7 @@
         <xsl:value-of select="."/>
       </xsl:variable>
    <tr>
-     <td class="f11"><div class="name"><a href="{$name}" title="{$name}/"><xsl:value-of select="."/>/</a></div></td>
+     <td class="f11"><div class="name">&#128194;<a href="{$name}" title="{$name}/"><xsl:value-of select="."/>/</a></div></td>
      <td><div class="size"> -- </div></td>
      <td><div class="mtime"> 
            <xsl:value-of select="@mtime" />
