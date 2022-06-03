@@ -1,9 +1,14 @@
 ---
 
 hostedprojects:
+  - archlinux
+  - centos
+  - epel
+  - fedora-amd64
+  - manjaro
   - ubuntu-releases
 
-tls_setup: False
+tls_setup: True
 site_sponsor: "CoreSite"
 site_sponsor_url: "https://www.coresite.com/"
 
