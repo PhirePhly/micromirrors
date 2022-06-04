@@ -14,7 +14,7 @@
         state: latest
 
     - name: Install required software
-      dnf:
+      package:
         state: present
         name:
           - certbot
