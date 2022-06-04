@@ -4,6 +4,9 @@
   become: true
   remote_user: mirror
 
+  handlers:
+    - import_tasks: handlers.yaml
+
   tasks:
     - name: Enable EPEL
       dnf:
@@ -171,23 +174,4 @@
         name: lldpd
         state: started
         enabled: yes
-
-
-
-  handlers:
-    - name: reload nginx
-      service:
-        name: nginx
-        state: reloaded
-
-    - name: reload firewall
-      service:
-        name: nftables
-        state: reloaded
-
-    - name: reload sysctl
-      command: sysctl -p
-
-    - name: restorecon
-      command: restorecon -ir /data/mirror
 
