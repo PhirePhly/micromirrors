@@ -7,7 +7,7 @@ hostedprojects:
   - manjaro
   - ubuntu-releases
 
-tls_setup: False
+tls_setup: True
 site_sponsor: "Minnesota VoIP"
 site_sponsor_url: "https://www.mnvoip.com/"
 
