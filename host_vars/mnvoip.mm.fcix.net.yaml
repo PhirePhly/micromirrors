@@ -1,0 +1,13 @@
+---
+
+hostedprojects:
+  - archlinux
+  - epel
+  - fedora-amd64
+  - manjaro
+  - ubuntu-releases
+
+tls_setup: False
+site_sponsor: "Minnesota VoIP"
+site_sponsor_url: "https://www.mnvoip.com/"
+

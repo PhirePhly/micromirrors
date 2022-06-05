@@ -26,6 +26,7 @@
           - rsync-daemon
           - screen
           - smartmontools
+          - traceroute
           - vim
           - whois
 
@@ -118,7 +119,7 @@
 
     - name: Set SE type on mirror data dir
       sefcontext:
-        target: "/data/mirror(/.*)?"
+        target: "/data2?/mirror(/.*)?"
         setype: "public_content_t"
         state: present
       notify: restorecon
