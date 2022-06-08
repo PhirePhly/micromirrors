@@ -1,0 +1,22 @@
+
+module my-reader1 1.0;
+
+require {
+	type collectd_t;
+	type var_log_t;
+	type udev_var_run_t;
+	type hddtemp_port_t;
+	class file read;
+	class tcp_socket name_connect;
+}
+
+#============= collectd_t ==============
+
+#!!!! This avc can be allowed using the boolean 'collectd_tcp_network_connect'
+allow collectd_t hddtemp_port_t:tcp_socket name_connect;
+
+#!!!! This avc is allowed in the current policy
+allow collectd_t udev_var_run_t:file read;
+
+#!!!! This avc is allowed in the current policy
+allow collectd_t var_log_t:file read;
