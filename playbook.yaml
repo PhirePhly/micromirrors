@@ -32,6 +32,8 @@
           - traceroute
           - vim
           - whois
+          - cockpit
+          - cockpit-ws
 
     - name: Update all software
       dnf:
@@ -175,3 +177,9 @@
         state: started
         enabled: yes
 
+    - name: Cockpit- enable socket
+      systemd:
+        name: cockpit.socket
+        state: started
+        enabled: yes
+        masked: no
