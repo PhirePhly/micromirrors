@@ -1,0 +1,290 @@
+---
+- name: gather os specific variables
+  include_vars: "{{ item }}"
+  tags:
+    - always
+    - install
+    - config
+  with_first_found:
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "{{ ansible_distribution | lower }}.yml"
+    - "{{ ansible_os_family | lower }}.yml"
+    - default.yml
+
+- name: Install collectd RHEL/CentOS/Fedora
+  package:
+    name: "{{ install_packages }}"
+    state: present
+  when:
+    ansible_distribution_file_variety == 'RedHat'
+    or
+    ansible_distribution == 'CentOS'
+    or
+    ansible_distribution == 'Red Hat Enterprise Linux'
+    or
+    ansible_distribution == 'Fedora'
+  notify:
+    - Restart collectd
+
+- name: Install collectd RHEL/CentOS/Fedora
+  package:
+    name: "{{ install_packages_physical }}"
+    state: present
+  when:
+    (
+      ansible_distribution_file_variety == 'RedHat'
+      or
+      ansible_distribution == 'CentOS'
+      or
+      ansible_distribution == 'Red Hat Enterprise Linux'
+      or
+      ansible_distribution == 'Fedora'
+    )
+    and
+    ansible_virtualization_role != 'guest'
+  notify:
+    - Restart collectd
+
+- name: Install collectd RHEL/CentOS/Fedora
+  package:
+   name:
+     - 'collectd-sensors'
+     - 'collectd-smart'
+     - 'hddtemp'
+     - 'OpenIPMI'
+   state: absent
+  when:
+    (
+      ansible_distribution_file_variety == 'RedHat'
+      or
+      ansible_distribution == 'CentOS'
+      or
+      ansible_distribution == 'Red Hat Enterprise Linux'
+      or
+      ansible_distribution == 'Fedora'
+    )
+    and
+    ansible_virtualization_role == 'guest'
+  notify:
+    - Restart collectd
+
+- name: Install collectd RHEL/CentOS/Fedora
+  package:
+   name:
+     - 'collectd-ping'
+   state: present
+  when:
+    (
+      (
+        ansible_distribution_file_variety == 'RedHat'
+        or
+        ansible_distribution == 'CentOS'
+        or
+        ansible_distribution == 'Red Hat Enterprise Linux'
+      )
+      and
+      ansible_facts['distribution_major_version']|int <= 7
+    )
+    or
+    ansible_distribution == 'Fedora'
+  notify:
+    - Restart collectd
+
+- name: Install collectd Debian/Ubuntu
+  package:
+   name:
+     - 'collectd'
+     - 'collectd-core'
+     - 'hddtemp'
+     - 'openipmi'
+   state: present
+  when:
+    ansible_distribution == 'Debian'
+    or
+    ansible_distribution == 'Ubuntu'
+  notify:
+    - Restart collectd
+
+- name: Copy over client.conf
+  template:
+    src: client.conf.j2
+    dest: "/etc/collectd.d/client.conf"
+  when:
+    ansible_distribution_file_variety == 'RedHat'
+    or
+    ansible_distribution == 'CentOS'
+    or
+    ansible_distribution == 'Red Hat Enterprise Linux'
+    or
+    ansible_distribution == 'Fedora'
+  notify:
+    - Restart collectd
+
+- name: Copy the collectd files over
+  template:
+   src: client.conf.j2
+   dest: /etc/collectd/collectd.conf.d/client.conf
+  when:
+    ansible_distribution == 'Debian'
+    or
+    ansible_distribution == 'Ubuntu'
+  notify:
+    - Restart collectd
+
+- name: Copy the collectd files over
+  copy:
+   src: files/common/
+   dest: "{{ collectd_dir_path }}"
+  when:
+    ansible_distribution_file_variety == 'RedHat'
+    or
+    ansible_distribution == 'CentOS'
+    or
+    ansible_distribution == 'Red Hat Enterprise Linux'
+    or
+    ansible_distribution == 'Fedora'
+  notify:
+    - Restart collectd
+
+- name: Copy the collectd files over
+  copy:
+   src: files/common/
+   dest: /etc/collectd/collectd.conf.d/
+  when:
+    ansible_distribution == 'Debian'
+    or
+    ansible_distribution == 'Ubuntu'
+  notify:
+    - Restart collectd
+
+- name: Debug- collectd_dir_path
+  debug:
+    msg: "{{ collectd_dir_path }}/network.conf"
+
+- name: Debug- var checks
+  debug:
+    msg: "{{ collectd_server }} | {{ ansible_fqdn }}"
+  when:
+    "'{{ collectd_server }}' != '{{ ansible_fqdn }}'"
+
+- name: Remove server config if we aren't the server
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+      - "{{ collectd_dir_path }}/network.conf"
+      - "{{ collectd_dir_path }}/server.conf"
+  when:
+    "'{{ collectd_server }}' != '{{ ansible_fqdn }}'"
+  notify:
+    - Restart collectd
+
+- name: Remove ping.conf if on Redhat
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+      - "{{ collectd_dir_path }}/ping.conf"
+  when:
+    ansible_distribution_file_variety == 'RedHat'
+    and
+    ansible_distribution != 'Fedora'
+  notify:
+    - Restart collectd
+
+- name: Delete VM configs
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+      - "{{ collectd_dir_path }}/smart.conf"
+      - "{{ collectd_dir_path }}/sensors.conf"
+      - "{{ collectd_dir_path }}/ping.conf"
+      - "{{ collectd_dir_path }}/ipmi.conf"
+      - "{{ collectd_dir_path }}/smart.conf"
+      - "{{ collectd_dir_path }}/postfix.conf"
+  when:
+    ansible_virtualization_role == 'guest'
+  notify:
+    - Restart collectd
+
+- name: Copy chrony
+  copy:
+   src: files/optional/chrony.conf
+   dest: /etc/collectd/collectd.conf.d/
+  when:
+    ansible_distribution == 'Debian'
+    or
+    ansible_distribution == 'Ubuntu'
+  notify:
+    - Restart collectd
+
+- name: Copy chrony
+  copy:
+   src: files/optional/chrony.conf
+   dest: /etc/collectd.d/
+  when:
+    ansible_distribution_file_variety == 'RedHat'
+    or
+    ansible_distribution == 'CentOS'
+    or
+    ansible_distribution == 'Red Hat Enterprise Linux'
+    or
+    ansible_distribution == 'Fedora'
+  notify:
+    - Restart collectd
+
+- name: Delete broken collectd.d from debianish
+  file:
+    state: absent
+    path: /etc/collectd.d/
+  when:
+    ansible_distribution == 'Debian'
+    or
+    ansible_distribution == 'Ubuntu'
+  notify:
+    - Restart collectd
+
+- name: Remove borky local.conf
+  ansible.builtin.file:
+    path:
+      - /etc/collectd/collectd.conf.d/local.conf
+      - /etc/collectd.d/local.conf
+    state: absent
+  notify:
+    - Restart collectd
+
+- name: Setup hddtemp - disable RUN_DAEMON false
+  lineinfile:
+    dest: "/etc/default/hddtemp"
+    regexp: 'RUN_DAEMON="false"'
+    line: '#RUN_DAEMON="false"'
+  when:
+    ansible_virtualization_role != 'guest'
+    and
+    ansible_os_family == 'Debian'
+  notify: "Restart hddtemp"
+
+- name: Setup hddtemp - enable daemon
+  lineinfile:
+    dest: "/etc/default/hddtemp"
+    regexp: 'RUN_DAEMON="true"'
+    line: 'RUN_DAEMON="true"'
+    insertafter: '#RUN_DAEMON="false"'
+  when:
+    ansible_virtualization_role != 'guest'
+    and
+    ansible_os_family == 'Debian'
+  notify: "Restart hddtemp"
+
+- name: Fixup rsyslog
+  copy:
+   src: files/rsyslog/
+   dest: /etc/rsyslog.d/
+  notify: "Restart rsyslogd"
+
+- name: Enable hddtemp
+  systemd:
+    name: hddtemp
+    enabled: yes
+    state: started

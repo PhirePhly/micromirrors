@@ -1,0 +1,17 @@
+---
+- name: Restart collectd
+  systemd:
+    name: collectd
+    state: restarted
+
+- name: Restart hddtemp
+  systemd:
+    name: hddtemp
+    state: restarted
+  notify: Restart collectd
+
+- name: Restart rsyslogd
+  systemd:
+    name: rsyslog
+    state: restarted
+

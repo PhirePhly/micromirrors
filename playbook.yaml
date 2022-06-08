@@ -8,6 +8,27 @@
     - import_tasks: handlers.yaml
 
   tasks:
+    - name: Check collectd_password
+      debug:
+        msg: "{{ lookup('first_found', params) }}"
+      vars:
+        params:
+          files:
+            - "{{ ansible_hostname|lower }}.yml"
+            - default.yml
+          paths:
+            - 'vault'
+
+    - name: "Load OS specific vault"
+      include_vars: "{{ lookup('first_found', params) }}"
+      vars:
+        params:
+          files:
+            - "{{ ansible_hostname|lower }}.yml"
+            - default.yml
+          paths:
+            - 'vault'
+
     - name: Enable EPEL
       dnf:
         name: epel-release
@@ -33,6 +54,7 @@
           - traceroute
           - vim
           - whois
+          - byobu
           - cockpit
           - cockpit-ws
           - gnutls
@@ -217,3 +239,24 @@
         state: started
         enabled: yes
         masked: no
+
+    - name: Check collectd_password
+      debug:
+        msg: Collectd password-{{ collectd_password }}
+
+    - name: Setup Collectd
+      include_role:
+        name: collectd
+      vars:
+        collectd_server: "gauss.monkeyblade.net"
+        collectd_username: "{{ ansible_hostname|lower }}"
+        #collectd_password: "{{ collectd_password }}"
+
+    - name: Collectd- remove ipmi, we don't have it
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+          - "/etc/collectd.d/ipmi.conf"
+      notify:
+        - Restart collectd

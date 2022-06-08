@@ -1,0 +1,28 @@
+---
+install_packages:
+   - 'collectd'
+   - 'collectd-disk'
+   - 'collectd-snmp'
+   - "collectd-chrony"
+   - "net-snmp"
+   - "net-snmp-utils"
+install_packages_physical:
+     - 'collectd-sensors'
+     - 'collectd-smart'
+     - 'hddtemp'
+     - 'OpenIPMI'
+uninstall_packages_virtualization:
+   - 'collectd-sensors'
+   - 'collectd-smart'
+   - 'hddtemp'
+   - 'OpenIPMI'
+collectd_dir_path: "/etc/collectd.d"
+rm_collectd_virtualization:
+  - smart.conf
+  - sensors.conf
+  - ping.conf
+  - ipmi.conf
+  - smart.conf
+  - postfix.conf
+hddtemp_config: "/etc/sysconfig/hddtemp"
+

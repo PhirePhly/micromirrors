@@ -1,0 +1,10 @@
+# Client
+LoadPlugin "network"
+
+<Plugin "network">
+	<Server "{{ collectd_server }}">
+		SecurityLevel "Encrypt"
+		Username "{{ collectd_username }}"
+		Password "{{ collectd_password }}"
+	</Server>
+</Plugin>
