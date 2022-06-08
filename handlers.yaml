@@ -1,17 +1,20 @@
-  handlers:
-    - name: reload nginx
-      service:
-        name: nginx
-        state: reloaded
+- name: reload nginx
+  service:
+    name: nginx
+    state: reloaded
 
-    - name: reload firewall
-      service:
-        name: nftables
-        state: reloaded
+- name: reload firewall
+  service:
+    name: nftables
+    state: reloaded
 
-    - name: reload sysctl
-      command: sysctl -p
+- name: reload sysctl
+  command: sysctl -p
 
-    - name: restorecon
-      command: restorecon -ir /data/mirror
+- name: restorecon
+  command: restorecon -ir /data/mirror
 
+- name: restart rsyslog
+  service:
+    name: rsyslog
+    state: restarted
