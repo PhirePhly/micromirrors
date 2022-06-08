@@ -1,0 +1,24 @@
+galaxy_info:
+  author: Michal Wojtowicz <poczta@mwojtowicz.it>
+  description: This role allows to create, compile and include SELinux modules
+  company: MWojtowicz.it
+
+  license: MIT
+
+  min_ansible_version: 1.2
+
+  github_branch: master
+
+  platforms:
+  - name: EL
+    versions:
+    - 7
+    - 8
+
+  galaxy_tags:
+    - selinux
+    - centos
+    - rhel
+    - semodule
+
+dependencies: []

@@ -1,0 +1,33 @@
+# Build and install single selinux module from a .te file
+
+- name: "SELinux - check if module was loaded"
+  command: semodule --list-modules
+  register: semodule_loaded
+  changed_when: 'selinux_module not in semodule_loaded.stdout'
+
+- name: "SELinux - create work directory"
+  file:
+    path: "{{ selinux_workdir }}"
+    state: directory
+    mode: 0700
+
+- name: "SELinux - copy type enforcement file"
+  template:
+    src: "{{ selinux_module_template|default(selinux_module ~ '.te') }}"
+    dest: "{{ selinux_workdir }}/{{ selinux_module }}.te"
+    mode: 0644
+  register: semodule_te
+
+- name: "SELinux - build and install policy"
+  command: "{{ item }}"
+  args:
+    chdir: "{{ selinux_workdir }}"
+  with_items:
+    - "checkmodule -M -m -o {{ selinux_module }}.mod {{ selinux_module }}.te"
+    - "semodule_package -o {{ selinux_module }}.pp -m {{ selinux_module }}.mod"
+    - "semodule -i {{ selinux_module }}.pp"
+  when: (
+    semodule_loaded is changed or
+    semodule_te is changed or
+    semodule_rebuild|default(False)
+    )

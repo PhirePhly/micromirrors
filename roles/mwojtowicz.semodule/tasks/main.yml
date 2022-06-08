@@ -1,0 +1,49 @@
+---
+- name: "Install dependencies for SEModule"
+  yum:
+    name:
+      - checkpolicy
+
+      - >-
+        {%- if ansible_facts.distribution_major_version|int >= 8 -%}
+          policycoreutils-python-utils
+        {%- else -%}
+          policycoreutils-python
+        {%- endif -%}
+
+      - policycoreutils
+
+      - >-
+        {%- if ansible_facts.distribution_major_version|int >= 8 -%}
+          python3-libselinux
+        {%- else -%}
+          libselinux-python
+        {%- endif -%}
+
+    state: present
+
+- name: Enable selinux
+  selinux:
+    policy: targeted
+    state: '{{ selinux_state }}'
+  when:
+    - manage_selinux_state
+    - not selinux_state == 'disabled'
+
+- name: Disable SELinux
+  selinux:
+    state: disabled
+  when:
+    - manage_selinux_state
+    - selinux_state == 'disabled'
+
+- include_tasks: semodule.yml
+  vars:
+    selinux_module: "{{ semodule_item.name }}"
+    selinux_module_template: "{{ semodule_item.template|default(semodule_item.name ~ '.te') }}"
+    semodule_rebuild: "{{ semodule_item.rebuild | default(False) }}"
+  with_items: "{{ selinux_modules }}"
+  loop_control:
+    loop_var: semodule_item
+  when:
+    - not selinux_state == 'disabled'
