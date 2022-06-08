@@ -1,0 +1,13 @@
+
+module my-rsyslogd 1.0;
+
+require {
+	type syslogd_t;
+	type httpd_var_lib_t;
+	class dir { add_name remove_name write };
+	class sock_file { create setattr unlink };
+}
+
+#============= syslogd_t ==============
+allow syslogd_t httpd_var_lib_t:dir { add_name remove_name write };
+allow syslogd_t httpd_var_lib_t:sock_file { create setattr unlink };

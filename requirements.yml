@@ -1,0 +1,4 @@
+- src: https://github.com/warthog9/ansible-semodule
+  version: master
+  name: mwojtowicz.semodule
+  scm: git

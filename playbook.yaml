@@ -25,6 +25,7 @@
           - '@nginx:1.20/common'
           - python3-certbot-nginx
           - python3-policycoreutils
+          - policycoreutils-python-utils
           - rsync
           - rsync-daemon
           - screen
@@ -34,6 +35,8 @@
           - whois
           - cockpit
           - cockpit-ws
+          - gnutls
+          - rsyslog-gnutls
 
     - name: Update all software
       dnf:
@@ -176,6 +179,37 @@
         name: lldpd
         state: started
         enabled: yes
+
+    - name: Metrics- copy over rsyslog.d
+      copy:
+        src: files/rsyslog.d/
+        dest: /etc/rsyslog.d/
+      notify: restart rsyslog
+
+    - name: Metrics- setup selinux contexts
+      copy:
+        src: files/selinux
+        dest: /root/
+
+    - name: Metrics- selinux module from template
+      import_role:
+        name: mwojtowicz.semodule
+        tasks_from: semodule.yml
+      vars:
+        selinux_module: my-nginx
+
+    - name: Metrics- selinux module from template
+      import_role:
+        name: mwojtowicz.semodule
+        tasks_from: semodule.yml
+      vars:
+        selinux_module: my-rsyslogd
+
+    - name: Metrics- selinux - enable logging to non-security directories
+      seboolean:
+        name: logging_syslogd_list_non_security_dirs
+        state: yes
+        persistent: yes
 
     - name: Cockpit- enable socket
       systemd:

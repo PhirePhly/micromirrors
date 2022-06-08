@@ -1,0 +1,11 @@
+
+module my-nginx 1.0;
+
+require {
+	type httpd_var_lib_t;
+	type httpd_t;
+	class sock_file write;
+}
+
+#============= httpd_t ==============
+allow httpd_t httpd_var_lib_t:sock_file write;
