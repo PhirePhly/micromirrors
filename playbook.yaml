@@ -214,22 +214,50 @@
         dest: /root/
 
     - name: Metrics- selinux module from template
-      import_role:
+      include_role:
         name: mwojtowicz.semodule
         tasks_from: semodule.yml
       vars:
-        selinux_module: my-nginx
-
-    - name: Metrics- selinux module from template
-      import_role:
-        name: mwojtowicz.semodule
-        tasks_from: semodule.yml
-      vars:
-        selinux_module: my-rsyslogd
+        selinux_module: "{{ item }}"
+      with_items:
+          - my-nginx
+          - my-rsyslogd
+          - my-collectd
+          - my-collectd-1
+          - my-collectd-2
+          - my-collectd-3
+          - my-collectd-4
+          - my-reader0
+          - my-reader0-1
+          - my-reader0-2
+          - my-reader1
+          - my-reader1-1
+          - my-reader1-2
+          - my-reader2
+          - my-reader2-1
+          - my-reader3
+          - my-reader3-2
+          - my-reader3-3
+          - my-reader3-4
+          - my-reader3-5
+          - my-reader4
+          - my-reader4-1
 
     - name: Metrics- selinux - enable logging to non-security directories
       seboolean:
         name: logging_syslogd_list_non_security_dirs
+        state: yes
+        persistent: yes
+
+    - name: Metrics- selinux - collectd enable tcp network connect
+      seboolean:
+        name: collectd_tcp_network_connect
+        state: yes
+        persistent: yes
+
+    - name: Metrics- selinux - collectd enable tcp network connect
+      seboolean:
+        name: domain_kernel_load_modules
         state: yes
         persistent: yes
 

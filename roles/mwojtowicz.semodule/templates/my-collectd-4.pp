@@ -1,0 +1,1 @@
+../../../files/selinux/my-collectd-4.pp

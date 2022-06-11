@@ -1,0 +1,1 @@
+../../../files/selinux/my-reader1-1.pp

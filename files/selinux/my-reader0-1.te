@@ -1,0 +1,21 @@
+
+module my-reader0-1 1.0;
+
+require {
+	type udev_var_run_t;
+	type fixed_disk_device_t;
+	type collectd_t;
+	class file { getattr open read };
+	class blk_file { getattr ioctl open read };
+	class capability sys_rawio;
+}
+
+#============= collectd_t ==============
+
+#!!!! This avc is allowed in the current policy
+#!!!! This av rule may have been overridden by an extended permission av rule
+allow collectd_t fixed_disk_device_t:blk_file { getattr ioctl open read };
+allow collectd_t self:capability sys_rawio;
+
+#!!!! This avc is allowed in the current policy
+allow collectd_t udev_var_run_t:file { getattr open read };

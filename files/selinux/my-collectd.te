@@ -1,0 +1,11 @@
+
+module my-collectd 1.0;
+
+require {
+	type collectd_t;
+	type snmpd_var_lib_t;
+	class dir write;
+}
+
+#============= collectd_t ==============
+allow collectd_t snmpd_var_lib_t:dir write;

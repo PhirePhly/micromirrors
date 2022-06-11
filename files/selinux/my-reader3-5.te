@@ -1,0 +1,18 @@
+
+module my-reader3-5 1.0;
+
+require {
+	type collectd_t;
+	type nvme_device_t;
+	class blk_file { getattr open read };
+	class capability sys_rawio;
+}
+
+#============= collectd_t ==============
+allow collectd_t nvme_device_t:blk_file getattr;
+
+#!!!! This avc is allowed in the current policy
+allow collectd_t nvme_device_t:blk_file { open read };
+
+#!!!! This avc is allowed in the current policy
+allow collectd_t self:capability sys_rawio;

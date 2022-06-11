@@ -1,0 +1,25 @@
+
+module my-reader2-1 1.0;
+
+require {
+	type udev_var_run_t;
+	type hddtemp_port_t;
+	type var_log_t;
+	type fixed_disk_device_t;
+	type collectd_t;
+	class file { getattr open read };
+	class tcp_socket name_connect;
+	class blk_file read;
+}
+
+#============= collectd_t ==============
+allow collectd_t fixed_disk_device_t:blk_file read;
+
+#!!!! This avc is allowed in the current policy
+allow collectd_t hddtemp_port_t:tcp_socket name_connect;
+
+#!!!! This avc is allowed in the current policy
+allow collectd_t udev_var_run_t:file { getattr open read };
+
+#!!!! This avc is allowed in the current policy
+allow collectd_t var_log_t:file open;

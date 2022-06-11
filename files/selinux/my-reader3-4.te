@@ -1,0 +1,18 @@
+
+module my-reader3-4 1.0;
+
+require {
+	type nvme_device_t;
+	type collectd_t;
+	class blk_file { open read };
+	class capability sys_rawio;
+}
+
+#============= collectd_t ==============
+
+#!!!! This avc is allowed in the current policy
+allow collectd_t nvme_device_t:blk_file read;
+allow collectd_t nvme_device_t:blk_file open;
+
+#!!!! This avc is allowed in the current policy
+allow collectd_t self:capability sys_rawio;

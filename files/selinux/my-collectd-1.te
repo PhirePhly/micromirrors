@@ -1,0 +1,14 @@
+
+module my-collectd-1 1.0;
+
+require {
+	type snmpd_var_lib_t;
+	type collectd_t;
+	class dir { add_name write };
+}
+
+#============= collectd_t ==============
+
+#!!!! This avc is allowed in the current policy
+allow collectd_t snmpd_var_lib_t:dir write;
+allow collectd_t snmpd_var_lib_t:dir add_name;

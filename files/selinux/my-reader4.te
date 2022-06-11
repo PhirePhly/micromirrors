@@ -1,0 +1,14 @@
+
+module my-reader4 1.0;
+
+require {
+	type udev_var_run_t;
+	type collectd_t;
+	class file { open read };
+}
+
+#============= collectd_t ==============
+
+#!!!! This avc is allowed in the current policy
+allow collectd_t udev_var_run_t:file read;
+allow collectd_t udev_var_run_t:file open;
