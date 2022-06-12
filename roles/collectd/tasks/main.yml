@@ -288,3 +288,9 @@
     name: hddtemp
     enabled: yes
     state: started
+
+- name: Enable collectd
+  systemd:
+    name: collectd
+    enabled: yes
+    state: started
