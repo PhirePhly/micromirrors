@@ -43,6 +43,7 @@
           - duperemove
           - lldpd
           - mosquitto
+          - net-tools
           - '@nginx:1.20/common'
           - python3-certbot-nginx
           - python3-policycoreutils
@@ -51,6 +52,7 @@
           - rsync-daemon
           - screen
           - smartmontools
+          - tcpdump
           - traceroute
           - vim
           - whois
