@@ -1,0 +1,124 @@
+---
+
+- hosts: all
+  become: true
+  remote_user: mirror
+
+  handlers:
+    - import_tasks: handlers.yaml
+
+  tasks:
+    - name: Check collectd_password
+      debug:
+        msg: "{{ lookup('first_found', params) }}"
+      vars:
+        params:
+          files:
+            - "{{ ansible_hostname|lower }}.yml"
+            - default.yml
+          paths:
+            - 'vault'
+
+    - name: "Load OS specific vault"
+      include_vars: "{{ lookup('first_found', params) }}"
+      vars:
+        params:
+          files:
+            - "{{ ansible_hostname|lower }}.yml"
+            - default.yml
+          paths:
+            - 'vault'
+
+    - name: Set SE type on mirror data dir
+      sefcontext:
+        target: "/data2?/mirror(/.*)?"
+        setype: "public_content_t"
+        state: present
+      notify: restorecon
+
+    - name: Metrics- copy over rsyslog.d
+      copy:
+        src: files/rsyslog.d/
+        dest: /etc/rsyslog.d/
+      notify: restart rsyslog
+
+    - name: Metrics- setup selinux contexts
+      copy:
+        src: files/selinux
+        dest: /root/
+
+    - name: Metrics- selinux module from template
+      include_role:
+        name: mwojtowicz.semodule
+        tasks_from: semodule.yml
+      vars:
+        selinux_module: "{{ item }}"
+      with_items:
+          - my-nginx
+          - my-rsyslogd
+          - my-collectd
+          - my-collectd-1
+          - my-collectd-2
+          - my-collectd-3
+          - my-collectd-4
+          - my-reader0
+          - my-reader0-1
+          - my-reader0-2
+          - my-reader1
+          - my-reader1-1
+          - my-reader1-2
+          - my-reader2
+          - my-reader2-1
+          - my-reader3
+          - my-reader3-2
+          - my-reader3-3
+          - my-reader3-4
+          - my-reader3-5
+          - my-reader4
+          - my-reader4-1
+
+    - name: Metrics- selinux - enable logging to non-security directories
+      seboolean:
+        name: logging_syslogd_list_non_security_dirs
+        state: yes
+        persistent: yes
+
+    - name: Metrics- selinux - collectd enable tcp network connect
+      seboolean:
+        name: collectd_tcp_network_connect
+        state: yes
+        persistent: yes
+
+    - name: Metrics- selinux - collectd enable tcp network connect
+      seboolean:
+        name: domain_kernel_load_modules
+        state: yes
+        persistent: yes
+
+    - name: Cockpit- enable socket
+      systemd:
+        name: cockpit.socket
+        state: started
+        enabled: yes
+        masked: no
+
+    - name: Check collectd_password
+      debug:
+        msg: Collectd password-{{ collectd_password }}
+
+    - name: Setup Collectd
+      include_role:
+        name: collectd
+      vars:
+        collectd_server: "gauss.monkeyblade.net"
+        collectd_username: "{{ ansible_hostname|lower }}"
+        #collectd_password: "{{ collectd_password }}"
+
+    - name: Collectd- remove ipmi, we don't have it
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+          - "/etc/collectd.d/ipmi.conf"
+      notify:
+        - Restart collectd
