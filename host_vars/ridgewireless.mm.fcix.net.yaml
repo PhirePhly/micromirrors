@@ -1,13 +1,13 @@
 ---
 
 hostedprojects:
-  - almalinux
-  - archlinux
+  - centos
+  - centos-stream
   - epel
   - fedora-amd64
-  - manjaro
+  - ubuntu-releases
 
-tls_setup: False
+tls_setup: True
 site_sponsor: "Ridge Wireless"
 site_sponsor_url: "https://ridgewireless.net/"
 
