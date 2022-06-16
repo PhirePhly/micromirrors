@@ -105,6 +105,11 @@
   notify:
     - Restart collectd
 
+- name: Determine if ipmi is present
+  shell: dmidecode | grep -q ipmi
+  register: collectd_has_ipmi
+  ignore_errors: yes
+
 - name: Copy over client.conf
   template:
     src: client.conf.j2
@@ -145,6 +150,18 @@
     ansible_distribution == 'Fedora'
   notify:
     - Restart collectd
+
+- name: Copy over IPMI if we have it
+  copy:
+   src: files/optional/ipmi.conf
+   dest: "{{ collectd_dir_path }}"
+  when: collectd_has_ipmi.rc == '0'
+
+- name: Ensure that the ipmi config is deleted if we don't have an ipmi
+  file:
+    path: "{{ collectd_dir_path }}/ipmi.conf"
+    state: absent
+  when: collectd_has_ipmi.rc != '0'
 
 - name: Copy the collectd files over
   copy:

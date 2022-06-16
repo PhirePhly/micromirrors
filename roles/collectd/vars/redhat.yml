@@ -6,6 +6,7 @@ install_packages:
    - "collectd-chrony"
    - "net-snmp"
    - "net-snmp-utils"
+   - dmidecode
 install_packages_physical:
      - 'collectd-sensors'
      - 'collectd-smart'
