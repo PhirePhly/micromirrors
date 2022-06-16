@@ -42,6 +42,12 @@
         dest: /etc/rsyslog.d/
       notify: restart rsyslog
 
+    - name: Ensure that the ca-bundle exists
+      file:
+        src:  /etc/ssl/certs/ca-bundle.crt
+        dest: /etc/ssl/certs/ca-certificates.crt
+        state: link
+
     - name: Metrics- setup selinux contexts
       copy:
         src: files/selinux
