@@ -2,6 +2,7 @@
   service:
     name: nginx
     state: reloaded
+    enabled: yes
 
 - name: reload firewall
   service:
@@ -12,7 +13,7 @@
   command: sysctl -p
 
 - name: restorecon
-  command: restorecon -ir /data/mirror
+  command: restorecon -ir /data/mirror /data2/mirror
 
 - name: restart rsyslog
   service:
