@@ -1,0 +1,9 @@
+---
+
+hostedprojects:
+  - ubuntu-releases
+
+tls_setup: False
+site_sponsor: "Pahducah Internet Exchange"
+site_sponsor_url: "https://paducahix.net/"
+
