@@ -9,6 +9,7 @@ hostedprojects:
   - ubuntu-releases
 
 tls_setup: True
+disableDSCP: True
 site_sponsor: "CoreSite"
 site_sponsor_url: "https://www.coresite.com/"
 

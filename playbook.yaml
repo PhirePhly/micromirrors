@@ -97,8 +97,8 @@
         dest: /usr/share/nginx/html/robots.txt
 
     - name: Configure nftables firewall
-      copy:
-        src: files/nftables.conf
+      template:
+        src: templates/nftables.conf
         dest: /etc/sysconfig/nftables.conf
       notify: reload firewall
 
