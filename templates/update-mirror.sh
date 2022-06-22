@@ -50,6 +50,10 @@ elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
 elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
 	PROJECT="fedora"
 {% endif %}
+{% if "kdeftp-stable" in hostedprojects %}
+elif [[ $1 = "rsync/$UPSTREAM/kdeftp" ]]; then
+	PROJECT="kdeftp"
+{% endif %}
 {% if "manjaro" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/manjaro" ]]; then
 	PROJECT="manjaro"
@@ -185,6 +189,22 @@ update_fedora() {
 
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "fedora" ]]; then
 	update_fedora
+fi
+
+{% endif %}
+{% if "kdeftp-stable" in hostedprojects %}
+update_kdeftp_stable() {
+	exec {lock_fd}>$LOCKDIR/mirror.kdeftp
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING KDEFTP ###\n"
+	mkdir -p /data/mirror/kdeftp/stable
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/kdeftp/stable/ /data/mirror/kdeftp/stable/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "kdeftp" ]]; then
+	update_kdeftp_stable
 fi
 
 {% endif %}

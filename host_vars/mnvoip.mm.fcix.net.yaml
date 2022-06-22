@@ -4,6 +4,7 @@ hostedprojects:
   - archlinux
   - epel
   - fedora-amd64
+  - kdeftp-stable
   - manjaro
   - ubuntu-releases
 
