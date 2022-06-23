@@ -220,6 +220,7 @@
       - "{{ collectd_dir_path }}/ipmi.conf"
       - "{{ collectd_dir_path }}/smart.conf"
       - "{{ collectd_dir_path }}/postfix.conf"
+      - "{{ collectd_dir_path }}/hddtemp.conf"
   when:
     ansible_virtualization_role == 'guest'
   notify:
