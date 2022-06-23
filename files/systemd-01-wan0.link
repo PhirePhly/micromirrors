@@ -1,0 +1,5 @@
+[Match prio=5]
+Path=pci-0000:0[0-9]:00.0
+Property=ID_MODEL_ID=0x8168 ID_NET_DRIVER=r8169
+[Link]
+Name=wan0
