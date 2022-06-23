@@ -306,6 +306,8 @@
     name: hddtemp
     enabled: yes
     state: started
+  when:
+    ansible_virtualization_role != 'guest'
 
 - name: Enable collectd
   systemd:
