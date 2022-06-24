@@ -5,6 +5,7 @@ hostedprojects:
   - centos
   - epel
   - fedora-amd64
+  - kdeftp-stable
   - ubuntu-releases
 
 tls_setup: True

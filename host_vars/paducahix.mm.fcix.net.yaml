@@ -1,6 +1,7 @@
 ---
 
 hostedprojects:
+  - kdeftp-stable
   - ubuntu-releases
 
 tls_setup: False
