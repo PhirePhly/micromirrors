@@ -1,10 +1,13 @@
 ---
 
 hostedprojects:
+  - centos
+  - epel
+  - fedora-amd64
   - kdeftp-stable
   - ubuntu-releases
 
-tls_setup: False
-site_sponsor: "Pahducah Internet Exchange"
+tls_setup: True
+site_sponsor: "Paducah Internet Exchange"
 site_sponsor_url: "https://paducahix.net/"
 
