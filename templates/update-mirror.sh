@@ -198,6 +198,7 @@ update_kdeftp_stable() {
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING KDEFTP ###\n"
 	mkdir -p /data/mirror/kdeftp/stable
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/kdeftp/last-updated /data/mirror/kdeftp/last-updated
 	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/kdeftp/stable/ /data/mirror/kdeftp/stable/
 	sleep 10
 	flock -u "$lock_fd"
