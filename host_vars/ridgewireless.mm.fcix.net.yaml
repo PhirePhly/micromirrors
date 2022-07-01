@@ -8,6 +8,7 @@ hostedprojects:
   - fedora-amd64
   - kdeftp-stable
   - manjaro
+  - opensuse
   - ubuntu-releases
 
 tls_setup: True
