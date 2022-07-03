@@ -51,7 +51,7 @@ elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
 	PROJECT="fedora"
 {% endif %}
 {% if "kdeftp-stable" in hostedprojects %}
-elif [[ $1 = "rsync/$UPSTREAM/kdeftp" ]]; then
+elif [[ $1 = "rsync/$UPSTREAM/kde" ]]; then
 	PROJECT="kdeftp"
 {% endif %}
 {% if "manjaro" in hostedprojects %}
