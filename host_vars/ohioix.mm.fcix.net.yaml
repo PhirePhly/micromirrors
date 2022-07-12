@@ -1,0 +1,9 @@
+---
+
+hostedprojects:
+  - ubuntu-releases
+
+tls_setup: False
+site_sponsor: "Ohio IX"
+site_sponsor_url: "https://ohioix.net/"
+
