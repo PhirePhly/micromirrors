@@ -1,6 +1,7 @@
 # Micro Mirrors
 
-An Ansible playbook to configure a Linux software mirror ready to be added to the public pools.
+Small CDN servers to host the most popular free software content to maximize positive impact on the community.
+Tiny 1RU or sub-1RU web servers provided to networks as a free managed appliance to use their surplus network capacity to help improve the user experience on Linux distributions.
 
 This project spawned as a thought experiment while working on the [FCIX mirror](https://mirror.fcix.net/) as to how software mirrors seem to always scale veritcally, and if it would be possible to build a meaningfully useful mirror for less than the $320 cost of one of the 16TB hard drives being used in the FCIX mirror.
 
