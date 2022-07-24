@@ -1,6 +1,8 @@
 ---
 
 hostedprojects:
+  - epel
+  - fedora-amd64
   - ubuntu-releases
 
 tls_setup: False

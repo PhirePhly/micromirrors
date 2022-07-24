@@ -1,9 +1,13 @@
 ---
 
 hostedprojects:
+  - centos
+  - epel
+  - fedora-amd64
+  - rpmfusion-nonfree
   - ubuntu-releases
 
-tls_setup: False
+tls_setup: True
 site_sponsor: "Ohio IX"
 site_sponsor_url: "https://ohioix.net/"
 
