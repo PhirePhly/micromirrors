@@ -70,6 +70,10 @@ elif [[ $1 = "rsync/$UPSTREAM/raspbian" ]]; then
 elif [[ $1 = "rsync/$UPSTREAM/rocky" ]]; then
 	PROJECT="rocky"
 {% endif %}
+{% if "rpmfusion-nonfree" in hostedprojects %}
+elif [[ $1 = "rsync/$UPSTREAM/rpmfusion" ]]; then
+	PROJECT="rpmfusion"
+{% endif %}
 {% if "ubuntu-releases" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/ubuntu-releases" ]]; then
 	PROJECT="ubuntu-releases"
@@ -269,6 +273,22 @@ update_rocky() {
 
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "rocky" ]]; then
 	update_rocky
+fi
+
+{% endif %}
+{% if "rpmfusion-nonfree" in hostedprojects %}
+update_rpmfusion_nonfree() {
+	exec {lock_fd}>$LOCKDIR/mirror.rpmfusion
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING RPMFUSION NONFREE ###\n"
+	mkdir -p /data/mirror/rpmfusion/nonfree
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/rpmfusion/nonfree/ /data/mirror/rpmfusion/nonfree/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "rpmfusion" ]]; then
+	update_rpmfusion_nonfree
 fi
 
 {% endif %}

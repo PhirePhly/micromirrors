@@ -54,5 +54,6 @@ Each project has a unique workflow for registering new mirrors.
 * [Manjaro](https://wiki.manjaro.org/index.php/Manjaro_Mirrors) (email info@manjaro.org)
 * [OpenSUSE](https://en.opensuse.org/openSUSE:Mirror_infrastructure)
 * [Rocky](https://docs.rockylinux.org/guides/mirror_management/add_mirror_manager/)
+* [RPMFusion](https://rpmfusion.org/Mirrors)
 * [Ubuntu-releases](https://wiki.ubuntu.com/Mirrors)
 
