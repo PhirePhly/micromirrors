@@ -2,12 +2,13 @@
 
 MIRROR:
   hosts:
-    codingflyboy.mm.fcix.net:
-    ridgewireless.mm.fcix.net:
-    coresite.mm.fcix.net:
-    nnenix.mm.fcix.net:
-    mnvoip.mm.fcix.net:
-    paducahix.mm.fcix.net:
-    ohioix.mm.fcix.net:
-    forksystems.mm.fcix.net:
     abqix.mm.fcix.net:
+    codingflyboy.mm.fcix.net:
+    coresite.mm.fcix.net:
+    forksystems.mm.fcix.net:
+    mnvoip.mm.fcix.net:
+    nnenix.mm.fcix.net:
+    ohioix.mm.fcix.net:
+    paducahix.mm.fcix.net:
+    ridgewireless.mm.fcix.net:
+    veronanetworks.mm.fcix.net:

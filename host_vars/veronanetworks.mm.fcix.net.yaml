@@ -1,0 +1,9 @@
+---
+
+hostedprojects:
+  - ubuntu-releases
+
+tls_setup: False
+site_sponsor: "Verona Networks"
+site_sponsor_url: "https://www.vntx.net/"
+
