@@ -1,11 +1,12 @@
 ---
 
 hostedprojects:
+  - centos
   - epel
   - fedora-amd64
   - ubuntu-releases
 
-tls_setup: False
+tls_setup: True
 site_sponsor: "ABQIX - New Mexico's Internet Exchange"
 site_sponsor_url: "https://abqix.net/"
 
