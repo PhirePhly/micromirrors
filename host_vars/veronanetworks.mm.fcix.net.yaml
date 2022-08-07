@@ -1,9 +1,12 @@
 ---
 
 hostedprojects:
+  - centos
+  - fedora-amd64
+  - epel
   - ubuntu-releases
 
-tls_setup: False
+tls_setup: True
 site_sponsor: "Verona Networks"
 site_sponsor_url: "https://www.vntx.net/"
 
