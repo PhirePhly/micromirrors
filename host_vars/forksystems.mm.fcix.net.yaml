@@ -9,6 +9,7 @@ hostedprojects:
   - fedora-amd64
   - manjaro
   - ubuntu-releases
+  - videolan
 
 tls_setup: True
 site_sponsor: "Fork Systems"

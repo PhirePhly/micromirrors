@@ -5,6 +5,7 @@ hostedprojects:
   - fedora-amd64
   - epel
   - ubuntu-releases
+  - videolan
 
 tls_setup: True
 site_sponsor: "Verona Networks"
