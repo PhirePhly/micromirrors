@@ -23,6 +23,45 @@
         name: epel-release
         state: latest
 
+    - name: Enable copr warthog9/epel8-missing-pieces
+      include_role:
+        name: devnullcake.copr-repository
+      vars:
+        copr_repository: "warthog9/epel8-missing-pieces"
+        copr_repository_action: "install"
+      when:
+        ansible_distribution != 'Fedora'
+        and
+        (
+          ansible_distribution_file_variety == 'RedHat'
+          or
+          ansible_distribution == 'CentOS'
+          or
+          ansible_distribution == 'Red Hat Enterprise Linux'
+        )
+        and
+        ansible_facts['distribution_major_version']|int == 8
+
+    - name: Enable copr warthog9/epel9-missing-pieces
+      include_role:
+        name: devnullcake.copr-repository
+      vars:
+        copr_repository: "warthog9/epel9-missing-pieces"
+        copr_repository_action: "install"
+      when:
+        ansible_distribution != 'Fedora'
+        and
+        (
+          ansible_distribution_file_variety == 'RedHat'
+          or
+          ansible_distribution == 'CentOS'
+          or
+          ansible_distribution == 'Red Hat Enterprise Linux'
+        )
+        and
+        ansible_facts['distribution_major_version']|int == 9
+
+
     - name: Install required software
       package:
         state: present
@@ -33,7 +72,6 @@
           - lldpd
           - mosquitto
           - net-tools
-          - '@nginx:1.20/common'
           - python3-certbot-nginx
           - python3-policycoreutils
           - policycoreutils-python-utils
@@ -50,6 +88,23 @@
           - cockpit-ws
           - gnutls
           - rsyslog-gnutls
+
+    - name: Install required software
+      package:
+        state: present
+        name:
+          - '@nginx:1.20/common'
+      when:
+        ansible_facts['distribution_major_version']|int == 8
+
+    - name: Install required software
+      package:
+        state: present
+        name:
+          - nginx
+          - nginx-mod-http-xslt-filter
+      when:
+        ansible_facts['distribution_major_version']|int == 9
 
     - name: Update all software
       dnf:
