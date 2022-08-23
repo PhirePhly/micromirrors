@@ -2,3 +2,8 @@
   version: master
   name: mwojtowicz.semodule
   scm: git
+
+- src: https://github.com/warthog9/ansible-role-copr-repository
+  version: master
+  name: devnullcake.copr-repository
+  scm: git
