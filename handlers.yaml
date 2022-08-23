@@ -3,6 +3,7 @@
     name: nginx
     state: reloaded
     enabled: yes
+  ignore_errors: yes
 
 - name: reload firewall
   service:
