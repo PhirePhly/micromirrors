@@ -78,6 +78,10 @@ elif [[ $1 = "rsync/$UPSTREAM/rpmfusion" ]]; then
 elif [[ $1 = "rsync/$UPSTREAM/ubuntu-releases" ]]; then
 	PROJECT="ubuntu-releases"
 {% endif %}
+{% if "videolan" in hostedprojects %}
+elif [[ $1 = "rsync/$UPSTREAM/videolan" ]]; then
+	PROJECT="videolan"
+{% endif %}
 else
 	# We don't understand the project invoked
 	exit 1
@@ -304,6 +308,21 @@ update_ubuntu_releases() {
 
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "ubuntu-releases" ]]; then
 	update_ubuntu_releases
+fi
+
+{% endif %}
+{% if "videolan" in hostedprojects %}
+update_videolan() {
+	exec {lock_fd}>$LOCKDIR/mirror.videolan
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING VIDEOLAN-FTP ###\n"
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/videolan-ftp/ /data/mirror/videolan-ftp/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "videolan" ]]; then
+	update_videolan
 fi
 
 {% endif %}

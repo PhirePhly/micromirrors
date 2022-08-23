@@ -56,4 +56,5 @@ Each project has a unique workflow for registering new mirrors.
 * [Rocky](https://docs.rockylinux.org/guides/mirror_management/add_mirror_manager/)
 * [RPMFusion](https://rpmfusion.org/Mirrors)
 * [Ubuntu-releases](https://wiki.ubuntu.com/Mirrors)
+* [Videolan](https://www.videolan.org/videolan/mirrors.html)
 
