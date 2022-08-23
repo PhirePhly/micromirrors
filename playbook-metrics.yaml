@@ -88,6 +88,37 @@
         name: logging_syslogd_list_non_security_dirs
         state: yes
         persistent: yes
+      when:
+        ansible_distribution != 'Fedora'
+        and
+        (
+          ansible_distribution_file_variety == 'RedHat'
+          or
+          ansible_distribution == 'CentOS'
+          or
+          ansible_distribution == 'Red Hat Enterprise Linux'
+        )
+        and
+        ansible_facts['distribution_major_version']|int == 8
+
+    - name: Metrics- selinux - enable logging to non-security directories
+      seboolean:
+        name: logging_syslogd_append_public_content
+        state: yes
+        persistent: yes
+      when:
+        ansible_distribution != 'Fedora'
+        and
+        (
+          ansible_distribution_file_variety == 'RedHat'
+          or
+          ansible_distribution == 'CentOS'
+          or
+          ansible_distribution == 'Red Hat Enterprise Linux'
+        )
+        and
+        ansible_facts['distribution_major_version']|int == 9
+
 
     - name: Metrics- selinux - collectd enable tcp network connect
       seboolean:
