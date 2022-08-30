@@ -101,8 +101,9 @@
     <xsl:apply-templates/>
    </center>
    <div style="margin-left:15px;font-size:15pt">
-     Micro Mirrors are low power free software mirrors that serve a small number of projects from across the Internet.
-     To learn more about this, talk to Kenneth Finnegan or John Hawley or check out the <a href="https://github.com/PhirePhly/micromirrors">README on Github</a>.
+     <a href="https://github.com/PhirePhly/micromirrors/blob/main/doc/product-brief.md">Micro Mirrors</a> are a fleet of optimized free software mirrors that serve a small number of projects from across the Internet.
+     The hardware for these mirrors are funded by <a href="https://liberapay.com/phirephly/">donations from the community</a>, with the hosting space, power, and network connecitivty provided by the hosting sponsor linked at the top of this page.
+     If you experience any technical issues with this mirror or have questions, please contact the <a href="mailto:mirror@fcix.net">FCIX Mirror Team</a>.
    </div>
    <br/>
  </body>
