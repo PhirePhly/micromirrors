@@ -181,10 +181,11 @@
         dest: /usr/local/bin/update-mirror.sh
         mode: '0755'
 
-    - name: Schedule update script and duperemove
+    - name: Schedule cron tasks
       copy:
-        src: files/cron.d/updatemirror
-        dest: /etc/cron.d/updatemirror
+        src: "{{ item }}"
+        dest: /etc/cron.d/
+      with_fileglob: files/cron.d/*
 
     - name: Create Mirror Data Dir
       file:
