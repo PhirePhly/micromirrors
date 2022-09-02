@@ -27,7 +27,7 @@ When an organization is interested in hosting their own mirror for free software
 This was the workflow originally followed by the FCIX team for our first mirror, but much of the software development done for this first mirror could be leveraged for additional mirrors with very little additional effort.
 The Micro Mirror workflow leverages this one-time development cost:
 
-1. Solicit community cash donations to fund defined BOM cost for cheap ($300) server configurations.
+1. Solicit [community cash donations](https://liberapay.com/phirephly/) to fund defined BOM cost for cheap ($300) server configurations.
 2. Purchase server hardware and identify hosting sponsor willing to provide DC space, power, and network connection for the new node.
 3. Kickstart Micro Mirror server with base operating system and network addresses provided by hosting sponsor. Ship bootstrapped server to host to deploy.
 4. Once node is online, select hosted projects in orchestration configuration file for the node and wait several hours for initial download to complete.

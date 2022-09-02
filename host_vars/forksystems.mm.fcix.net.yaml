@@ -8,6 +8,7 @@ hostedprojects:
   - epel
   - fedora-amd64
   - manjaro
+  - rocky
   - ubuntu-releases
   - videolan
 
