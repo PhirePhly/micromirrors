@@ -54,6 +54,10 @@ elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
 elif [[ $1 = "rsync/$UPSTREAM/kde" ]]; then
 	PROJECT="kdeftp"
 {% endif %}
+{% if "linuxmint-images" in hostedprojects %}
+elif [[ $1 = "rsync/$UPSTREAM/linuxmint-images" ]]; then
+	PROJECT="linuxmint-images"
+{% endif %}
 {% if "manjaro" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/manjaro" ]]; then
 	PROJECT="manjaro"
@@ -214,6 +218,21 @@ update_kdeftp_stable() {
 
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "kdeftp" ]]; then
 	update_kdeftp_stable
+fi
+
+{% endif %}
+{% if "linuxmint-images" in hostedprojects %}
+update_linuxmint_images() {
+	exec {lock_fd}>$LOCKDIR/mirror.linuxmint-images
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING LINUXMINT IMAGES ###\n"
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/linuxmint-images/ /data/mirror/linuxmint-images/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "linuxmint-images" ]]; then
+	update_linuxmint_images
 fi
 
 {% endif %}
