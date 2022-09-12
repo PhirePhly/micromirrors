@@ -179,7 +179,7 @@ update_epel() {
 	exec {lock_fd}>$LOCKDIR/mirror.epel
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING EPEL ###\n"
-	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/fedora-epel/ /data/mirror/epel/
+	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/armhfp/**' --exclude '**/aarch64/**' --exclude '**/ppc64le/**' --exclude '**/s390x/**' --exclude '**/testing/**' --exclude '**/playground/**' --exclude '**/next/**' --delete-excluded --bwlimit=25M rsync://$UPSTREAM/fedora-epel/ /data/mirror/epel/
 	sleep 10
 	flock -u "$lock_fd"
 }
@@ -194,7 +194,7 @@ update_fedora() {
 	exec {lock_fd}>$LOCKDIR/mirror.fedora
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING FEDORA AMD64 ###\n"
-	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/armhfp/**' --exclude '**/aarch64/**' --exclude '**/debug/**' --exclude '**/test/**' --exclude '**/testing/**' --exclude '**/Spins/**' --delete-excluded --bwlimit=25M rsync://$UPSTREAM/fedora-enchilada0/ /data/mirror/fedora/
+	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/armhfp/**' --exclude '**/aarch64/**' --exclude '**/debug/**' --exclude '**/36_Beta/**' --exclude '**/testing/**' --exclude '**/Spins/**' --delete-excluded --bwlimit=25M rsync://$UPSTREAM/fedora-enchilada0/ /data/mirror/fedora/
 	sleep 10
 	flock -u "$lock_fd"
 }
