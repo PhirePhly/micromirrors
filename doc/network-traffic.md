@@ -12,6 +12,9 @@ The volume of traffic served by each mirror for each project hosted by it varies
 * If the project has recently shipped any updates or released a new version of their software. On a typical day OS clients will request the top level serial number for the project, confirm that there's no new updates available, and move on. When there's security or feature updates, particularly for large packages such as the Linux kernel, LibreOffice, the Java toolchain, etc, then all of the clients downloading that new package can cause a sizable uptick in traffic on a specific day.
 * The geographical location of the mirror. Many projects will try and steer clients to a geographically near-by mirror, so a mirror located in a high traffic area such as Virginia on the east coast will see significantly more requests for a project than one in the midwest.
 
+Each download request can vary in size quite a bit.
+The majority of traffic is requesting 5-20MB index files to check to see if there are any updates available, but the size of each software package (i.e. RPM or DEB file) varies, and ISO disk images can be as large as 10GB, so while most connections are short lived, longer downloads for large files or whole directories are experienced as well.
+
 ## Traffic Flows
 
 The traffic flows in and out of a Micro Mirror consist of the following:
