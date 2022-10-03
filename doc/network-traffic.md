@@ -20,12 +20,12 @@ The traffic flows in and out of a Micro Mirror consist of the following:
 
 2. Streaming Telemetry and Monitoring. Each Micro Mirror streams telemetry on system health and the client requests it's handing back to a watchtower system over syslog and collectd. (Volume: ~100kbps)
 
-3. Rsync updates from upstream mirrors. As each project releases new files to be hosted by the mirror constellation, each mirror downloads a copy of the new files to update their local respository. (Volume: 20-100GB/day. 200Mbps per project)
+3. Rsync updates from upstream mirrors. As each project releases new files to be hosted by the mirror constellation, each mirror downloads a copy of the new files to update their local repository. (Volume: 20-100GB/day. 200Mbps per project)
 
 4. Client requests over HTTP/HTTPS/RSYNC. Public clients requesting file downloads and project health checker systems will request various files over HTTP or Rsync, with the exact volume per mirror and per project per day varying greatly based on the variables mentioned previously. (Volume: 3-15TB/day. 100Mbps-3Gbps)
 
 The egress traffic from a mirror typically sits in the 500Mbps-2Gbps range the majority of the time.
-It is extremely rare for the level of traffic to exceed 3Gbps based on 5 second averages, and has only been seen during exceptional events such as release days for popular Linux distrobutions or major security patches for popular software for a few hours.
+It is extremely rare for the level of traffic to exceed 3Gbps based on 5 second averages, and has only been seen during exceptional events such as release days for popular Linux distributions or major security patches for popular software for a few hours.
 
 Typical 24 hour network traffic from a Micro Mirror's perspective
 
@@ -37,5 +37,5 @@ Due to the nature of update traffic being a background, low priority, bulk file 
 
 To assist in that, all relevant egress traffic from the Micro Mirror appliances are marked with the CS1 DSCP mark (0x08), which is conventionally used to indicate scavenger class.
 
-Since the majority of traffic is egress, hosts are encouraged to set up QoS policies to protect their egress bandwidth from these appliances, but we do ask that no policers are implmented to artificially limit the network speed for the Micro Mirror.
+Since the majority of traffic is egress, hosts are encouraged to set up QoS policies to protect their egress bandwidth from these appliances, but we do ask that no policers are implemented to artificially limit the network speed for the Micro Mirror.
 In event of congestion, drop as much Micro Mirror traffic as desired, but when unutilized we would like 100% capacity available to the mirror.
