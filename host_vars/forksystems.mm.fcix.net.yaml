@@ -7,7 +7,6 @@ hostedprojects:
   - centos-stream
   - epel
   - fedora-amd64
-  - linuxmint-images
   - manjaro
   - rocky
   - ubuntu-releases
