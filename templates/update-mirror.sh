@@ -50,6 +50,10 @@ elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
 elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
 	PROJECT="fedora"
 {% endif %}
+{% if "gimp" in hostedprojects %}
+elif [[ $1 = "rsync/$UPSTREAM/gimp" ]]; then
+	PROJECT="gimp"
+{% endif %}
 {% if "kdeftp-stable" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/kde" ]]; then
 	PROJECT="kdeftp"
@@ -201,6 +205,21 @@ update_fedora() {
 
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "fedora" ]]; then
 	update_fedora
+fi
+
+{% endif %}
+{% if "gimp" in hostedprojects %}
+update_gimp() {
+	exec {lock_fd}>$LOCKDIR/mirror.gimp
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING GIMP ###\n"
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/gimp/ /data/mirror/gimp/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "gimp" ]]; then
+	update_gimp
 fi
 
 {% endif %}
