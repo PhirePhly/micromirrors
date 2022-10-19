@@ -12,7 +12,7 @@ LOCKDIR="/home/mirror/lock"
 
 PROJECT=""
 FLOCK_ARGS=""
-RSYNC_ARGS=(-avSH '--filter=R .~tmp~' --delete-delay --fuzzy --delay-updates --bwlimit=25M)
+RSYNC_ARGS=(-avSH '--filter=R .~tmp~' --delete-delay --fuzzy --delay-updates --bwlimit=25M --timeout=600)
 
 find $LOGDIR -mtime +2 -name "*.log" -delete
 
@@ -179,7 +179,7 @@ update_epel() {
 	exec {lock_fd}>$LOCKDIR/mirror.epel
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING EPEL ###\n"
-	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/armhfp/**' --exclude '**/aarch64/**' --exclude '**/ppc64le/**' --exclude '**/s390x/**' --exclude '**/testing/**' --exclude '**/playground/**' --exclude '**/next/**' --exclude '**/debug/**' --delete-excluded --bwlimit=25M rsync://$UPSTREAM/fedora-epel/ /data/mirror/epel/
+	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/armhfp/**' --exclude '**/aarch64/**' --exclude '**/ppc64le/**' --exclude '**/s390x/**' --exclude '**/testing/**' --exclude '**/playground/**' --exclude '**/next/**' --exclude '**/debug/**' --delete-excluded --bwlimit=25M --timeout=600 rsync://$UPSTREAM/fedora-epel/ /data/mirror/epel/
 	sleep 10
 	flock -u "$lock_fd"
 }
@@ -194,7 +194,7 @@ update_fedora() {
 	exec {lock_fd}>$LOCKDIR/mirror.fedora
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING FEDORA AMD64 ###\n"
-	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/armhfp/**' --exclude '**/aarch64/**' --exclude '**/debug/**' --exclude '**/36_Beta/**' --exclude '**/testing/**' --exclude '**/Spins/**' --delete-excluded --bwlimit=25M rsync://$UPSTREAM/fedora-enchilada0/ /data/mirror/fedora/
+	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/armhfp/**' --exclude '**/aarch64/**' --exclude '**/debug/**' --exclude '**/36_Beta/**' --exclude '**/testing/**' --exclude '**/Spins/**' --delete-excluded --bwlimit=25M --timeout=600 rsync://$UPSTREAM/fedora-enchilada0/ /data/mirror/fedora/
 	sleep 10
 	flock -u "$lock_fd"
 }
@@ -257,7 +257,7 @@ update_opensuse() {
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING OPENSUSE TUMBLEWEED ###\n"
 	mkdir -p /data/mirror/opensuse/tumbleweed
-	rsync -avSH --fuzzy '--filter=R .~tmp~' --no-links --delay-updates --bwlimit=25M rsync://$UPSTREAM/opensuse/tumbleweed/ /data/mirror/opensuse/tumbleweed/
+	rsync -avSH --fuzzy '--filter=R .~tmp~' --no-links --delay-updates --bwlimit=25M --timeout=600 rsync://$UPSTREAM/opensuse/tumbleweed/ /data/mirror/opensuse/tumbleweed/
 	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/opensuse/tumbleweed/ /data/mirror/opensuse/tumbleweed/
 	sleep 10
 	flock -u "$lock_fd"
@@ -273,8 +273,8 @@ update_raspbian() {
 	exec {lock_fd}>$LOCKDIR/mirror.raspbian
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING RASPBIAN ###\n"
-	rsync --recursive --fuzzy -v --times --links --safe-links --hard-links --stats --exclude 'Packages*' --exclude 'Sources*' --exclude 'Release*' --exclude 'InRelease' rsync://$UPSTREAM/raspbian/ /data/mirror/raspbian/
-	rsync --recursive -v --times --links --safe-links --hard-links --stats --delete --delete-after rsync://$UPSTREAM/raspbian/ /data/mirror/raspbian/
+	rsync --recursive --fuzzy -v --times --links --safe-links --hard-links --stats --exclude 'Packages*' --exclude 'Sources*' --exclude 'Release*' --exclude 'InRelease' --timeout=600 rsync://$UPSTREAM/raspbian/ /data/mirror/raspbian/
+	rsync --recursive -v --times --links --safe-links --hard-links --stats --delete --delete-after --timeout=600 rsync://$UPSTREAM/raspbian/ /data/mirror/raspbian/
 	sleep 10
 	flock -u "$lock_fd"
 }
