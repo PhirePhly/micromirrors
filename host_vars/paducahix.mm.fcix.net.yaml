@@ -4,6 +4,7 @@ hostedprojects:
   - centos
   - epel
   - fedora-amd64
+  - gimp
   - kdeftp-stable
   - ubuntu-releases
 
