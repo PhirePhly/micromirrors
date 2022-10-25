@@ -1,0 +1,9 @@
+---
+
+hostedprojects:
+  - ubuntu-releases
+
+tls_setup: False
+site_sponsor: "Ziply Fiber"
+site_sponsor_url: "https://ziplyfiber.com/"
+

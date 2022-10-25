@@ -1,0 +1,16 @@
+---
+
+hostedprojects:
+  - almalinux
+  - archlinux
+  - centos
+  - epel
+  - fedora-amd64
+  - gimp
+  - manjaro
+  - ubuntu-releases
+
+tls_setup: False
+site_sponsor: "The University of Vermont Network Services"
+site_sponsor_url: "https://www.uvm.edu/telcom/"
+
