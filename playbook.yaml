@@ -9,6 +9,9 @@
 
   tasks:
     - name: "Load OS specific vault"
+      include_vars: vault/common.yml
+
+    - name: "Load OS specific vault"
       include_vars: "{{ lookup('first_found', params) }}"
       vars:
         params:
@@ -241,4 +244,24 @@
         name: lldpd
         state: started
         enabled: yes
+
+    - name: Setup fail2ban
+      include_role:
+        name: fail2ban
+
+    - name: fail2ban- selinux module from template
+      include_role:
+        name: mwojtowicz.semodule
+        tasks_from: semodule.yml
+      vars:
+        selinux_module: "{{ item }}"
+      with_items:
+          - my-nginx
+
+    - name: set SELinux nis_enable
+      seboolean:
+        name: nis_enabled
+        state: true
+        persistent: true
+
 

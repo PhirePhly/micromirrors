@@ -1,0 +1,10 @@
+[Init]
+# Definition of the table used
+nftables_family = ip
+nftables_table  = fail2ban
+
+# Drop packets 
+blocktype       = drop
+
+# Remove nftables prefix. Set names are limited to 15 char so we want them all
+nftables_set_prefix =

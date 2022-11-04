@@ -1,0 +1,130 @@
+---
+# Include variables and define needed variables.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Install fail2ban-server
+  package:
+    name: [
+      "fail2ban-server", 
+      "fail2ban-sendmail"
+    ]
+    state: present
+  notify: Restart fail2ban
+  when:
+    ansible_distribution_file_variety == 'RedHat'
+    or
+    ansible_distribution == 'CentOS'
+    or
+    ansible_distribution == 'Red Hat Enterprise Linux'
+    or
+    ansible_distribution == 'Fedora'
+
+- package:
+    name: [
+     'fail2ban',
+    ]
+    state: present
+  when:
+    ansible_distribution == 'Debian'
+    or
+    ansible_distribution == 'Ubuntu'
+
+# So the fail2ban service that ships with RHEL/CentOS assumes
+# firewalld, which is not right, and fail2ban won't work correctly
+# if nftables is rebooted out from under it without fail2ban
+# bouncing as well. 
+- name: Ensure the fail2ban service, with nftables, is in place
+  copy:
+    src: nft-fail2ban.service
+    dest: /etc/systemd/system/fail2ban.service
+  notify: Restart nftables
+
+####
+## End cleanup and don't need
+####
+
+- name: Add Fail2Ban local config options
+  copy:
+    src: f2b-nftables-common.local
+    dest: /etc/fail2ban/action.d/nftables-common.local
+  notify: Restart fail2ban
+
+- name: Add Fail2Ban Dovecot filter
+  copy:
+    src: dovecot-pop3imap.conf
+    dest: /etc/fail2ban/filter.d/dovecot-pop3imap.conf
+  notify: Restart fail2ban
+
+- name: Add the Fail2Ban jail.local
+  template:
+    src: f2b-jail.local.j2
+    dest: /etc/fail2ban/jail.local
+  vars:
+    path_to_maillog: /var/log/maillog
+  notify: Restart fail2ban
+  when:
+    ansible_distribution_file_variety == 'RedHat'
+    or
+    ansible_distribution == 'CentOS'
+    or
+    ansible_distribution == 'Red Hat Enterprise Linux'
+    or
+    ansible_distribution == 'Fedora'
+
+- name: Add the Fail2Ban jail.local
+  template:
+    src: f2b-jail.local.j2
+    dest: /etc/fail2ban/jail.local
+  vars:
+    #path_to_maillog: /var/log/mail.warn
+    path_to_maillog: "%(syslog_mail)s"
+  notify: Restart fail2ban
+  when:
+    ansible_distribution == 'Debian'
+    or
+    ansible_distribution == 'Ubuntu'
+
+- name: Add Null Route Networks Python Script
+  copy:
+    src: nrn_submit_blacklist.py
+    dest: /usr/local/sbin/
+    mode: 0755
+
+- name: Add Null Route Networks configuration file
+  template:
+    src: nrn_blacklist.conf
+    dest: /etc/
+    mode: 0755
+
+- name: Add Null Route Networks Fail2ban action
+  copy:
+    src: action-nrn_submit_blacklist.conf
+    dest: /etc/fail2ban/action.d/nrn_submit_blacklist.conf
+  notify: Restart fail2ban
+
+- name: Add recidive configuration
+  copy:
+    src: f2b-recidive.conf
+    dest: /etc/fail2ban/jail.d/recidive.conf
+  notify: Restart fail2ban
+
+- name: Ensure that Fail2Ban is enabled
+  systemd:
+    name: fail2ban
+    enabled: yes
+  notify: Restart fail2ban
+
+- name: Fail2Ban - ensure the log file exists
+  copy:
+    content: ""
+    dest: /var/log/fail2ban.log
+    force: no
+    group: root
+    owner: root
+  notify: Restart fail2ban
+
+- name: Logrotate Fail2Ban log
+  copy:
+    src: logrotate-fail2ban
+    dest: /etc/logrotate.d/fail2ban

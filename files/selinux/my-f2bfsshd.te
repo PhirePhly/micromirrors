@@ -1,0 +1,11 @@
+
+module my-f2bfsshd 1.0;
+
+require {
+	type syslogd_var_run_t;
+	type fail2ban_t;
+	class dir watch;
+}
+
+#============= fail2ban_t ==============
+allow fail2ban_t syslogd_var_run_t:dir watch;

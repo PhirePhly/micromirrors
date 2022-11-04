@@ -1,0 +1,36 @@
+[DEFAULT]
+# Destination email for action that send you an email
+destemail = {{fail2ban_email}}
+
+# Sender email. Warning: not all actions take this into account. Make sure to test if you rely on this
+sender    = fail2ban@{{ ansible_host }}
+
+# Default action. Will block user and send you an email with whois content and log lines.
+action    = %(action_mwl)s
+
+# configure nftables
+banaction = nftables-multiport
+chain     = input
+
+ignoreip = 127.0.0.1/8 ::1 23.128.96.0/24 2620:137:e000::/44
+
+[recidive]
+banaction = nftables-allports
+            nrn_submit_blacklist
+
+[sshd]
+port    = ssh,{{ ansible_port | default(22)}}
+enabled = true
+backend = systemd
+
+[postfix-sasl]
+enabled = true
+
+[dovecot-pop3imap]
+enabled = true
+filter = dovecot-pop3imap
+action = nftables-multiport[name=dovecot-pop3imap, port="pop3,pop3s,imap,imaps", protocol=tcp]
+logpath = {{ path_to_maillog }}
+maxretry = 20
+findtime = 1200
+bantime = 1200
