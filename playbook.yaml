@@ -91,6 +91,21 @@
           - cockpit-ws
           - gnutls
           - rsyslog-gnutls
+          - postfix
+
+    - name: Postfix make sure devnull@localhost exists
+      include_role:
+        name: repleo.aliases
+      vars:
+        aliases:
+          - user: devnull
+            alias: /dev/null
+
+    - name: Enable postfix service
+      systemd:
+        name: postfix.service
+        state: started
+        enabled: yes
 
     - name: Install required software
       package:

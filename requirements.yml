@@ -7,3 +7,8 @@
   version: master
   name: devnullcake.copr-repository
   scm: git
+
+- src: https://github.com/repleo/ansible-role-aliases
+  version: master
+  name: repleo.aliases
+  scm: git
