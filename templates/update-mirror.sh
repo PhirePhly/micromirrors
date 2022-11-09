@@ -123,7 +123,7 @@ update_archlinux() {
 	exec {lock_fd}>$LOCKDIR/mirror.archlinux
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING ARCH LINUX ###\n"
-	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/archlinux/ /data/mirror/archlinux/
+	rsync -avSH --delete-delay --fuzzy --delay-updates --bwlimit=10M --timeout=600 rsync://$UPSTREAM/archlinux/ /data/mirror/archlinux/
 	sleep 10
 	flock -u "$lock_fd"
 }
@@ -260,7 +260,7 @@ update_manjaro() {
 	exec {lock_fd}>$LOCKDIR/mirror.manjaro
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING MANJARO ###\n"
-	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/manjaro/ /data/mirror/manjaro/
+	rsync -avSH --delete-delay --fuzzy --delay-updates --bwlimit=10M --timeout=600 rsync://$UPSTREAM/manjaro/ /data/mirror/manjaro/
 	sleep 10
 	flock -u "$lock_fd"
 }

@@ -49,3 +49,9 @@ Run playbook and wait for system to pull in full project repo. Ensure that autom
 
 Contact projects requesting that the new mirror be added to their load balancers.
 
+
+For Alma9, need to use udev to rename interfaces. `/etc/udev/rules.d/70-custom-ifnames.rules` Would be nice to find rule based on PCI address...
+
+```
+SUBSYSTEM=="net",ACTION=="add",ATTR{address}=="00:8c:fa:d3:6e:d7",ATTR{type}=="1",NAME="wan0"
+```

@@ -69,29 +69,30 @@
       package:
         state: present
         name:
+          - byobu
           - certbot
+          - cockpit
+          - cockpit-ws
           - dstat
           - duperemove
+          - gnutls
           - lldpd
           - mosquitto
           - net-tools
+          - postfix
           - python3-certbot-nginx
           - python3-policycoreutils
           - policycoreutils-python-utils
           - rsync
           - rsync-daemon
+          - rsyslog-gnutls
           - screen
           - smartmontools
           - tcpdump
           - traceroute
           - vim
+          - wget
           - whois
-          - byobu
-          - cockpit
-          - cockpit-ws
-          - gnutls
-          - rsyslog-gnutls
-          - postfix
 
     - name: Postfix make sure devnull@localhost exists
       include_role:

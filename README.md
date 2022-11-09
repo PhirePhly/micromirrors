@@ -16,7 +16,7 @@ This would mesh well with micro mirrors only have a 1Gbps NIC, making it an easi
 ## Initial Experiment
 
 Given this thesis that micro mirrors may be helpful to distros, we're building an initial fleet of them based on HP T620 thin clients with 8GB RAM / 2TB M.2 SATA SSDs in them.
-The design is detailed in the `hardware/` folder, but the BOM cost for parts off ebay works out to roughly $220 each.
+The design is detailed in the `doc/` folder, but the BOM cost for parts off ebay works out to roughly $220 each.
 
 With these nodes, we're deploying them in a select number of sites with the objective of a single node per hosting AS and a single node per physical building, to try and distribute the fault domain of these mirrors.
 

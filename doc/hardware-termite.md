@@ -1,5 +1,12 @@
 
 
+BOM:
+
+* Dell R220 1RU server
+* 4x8GB UDIMM DDR3
+* 2x10G NIC
+* 8TB HGST HUH728080ALE601 hard drive
+
 bond setup
 https://www.nodeum.io/howto/lacp-bonding-configuration-by-using-nmcli-centos-or-rhel-7
 
