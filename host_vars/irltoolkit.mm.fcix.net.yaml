@@ -4,7 +4,6 @@ hostedprojects:
   - archlinux
   - epel
   - fedora-amd64
-  - gimp
   - manjaro
   - videolan
   - ubuntu-releases

@@ -3,7 +3,6 @@
 hostedprojects:
   - archlinux
   - centos
-  - centos-stream
   - epel
   - fedora-amd64
   - kdeftp-stable
