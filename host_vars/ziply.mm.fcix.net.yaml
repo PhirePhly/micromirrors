@@ -5,6 +5,7 @@ hostedprojects:
   - archlinux
   - centos
   - epel
+  - fdroid-repo
   - fedora-amd64
   - gimp
   - manjaro

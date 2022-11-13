@@ -46,6 +46,10 @@ elif [[ $1 = "rsync/$UPSTREAM/centos-stream" ]]; then
 elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
 	PROJECT="fedora"
 {% endif %}
+{% if "fdroid-repo" in hostedprojects %}
+elif [[ $1 = "rsync/$UPSTREAM/fdroid" ]]; then
+	PROJECT="fdroid"
+{% endif %}
 {% if "fedora-amd64" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
 	PROJECT="fedora"
@@ -190,6 +194,22 @@ update_epel() {
 
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "fedora" ]]; then
 	update_epel
+fi
+
+{% endif %}
+{% if "fdroid-repo" in hostedprojects %}
+update_fdroid-repo() {
+	exec {lock_fd}>$LOCKDIR/mirror.fdroid
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING FDROID ###\n"
+	mkdir -p /data/mirror/fdroid
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/fdroid/repo/ /data/mirror/fdroid/repo/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "fdroid" ]]; then
+	update_fdroid-repo
 fi
 
 {% endif %}
