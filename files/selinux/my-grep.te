@@ -1,0 +1,10 @@
+
+module my-grep 1.0;
+
+require {
+	type fail2ban_t;
+	class process execmem;
+}
+
+#============= fail2ban_t ==============
+allow fail2ban_t self:process execmem;

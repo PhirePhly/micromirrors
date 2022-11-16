@@ -1,0 +1,11 @@
+
+module my-reader1-3 1.0;
+
+require {
+	type removable_device_t;
+	type collectd_t;
+	class blk_file read;
+}
+
+#============= collectd_t ==============
+allow collectd_t removable_device_t:blk_file read;

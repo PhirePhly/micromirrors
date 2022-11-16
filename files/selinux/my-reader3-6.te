@@ -1,0 +1,14 @@
+
+module my-reader3-6 1.0;
+
+require {
+	type removable_device_t;
+	type collectd_t;
+	class blk_file { open read };
+}
+
+#============= collectd_t ==============
+
+#!!!! This avc is allowed in the current policy
+allow collectd_t removable_device_t:blk_file read;
+allow collectd_t removable_device_t:blk_file open;

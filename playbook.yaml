@@ -273,6 +273,11 @@
         selinux_module: "{{ item }}"
       with_items:
           - my-nginx
+          - my-f2bfsshd2
+          - my-grep
+          - my-reader3-6
+          - my-reader3-7
+          - my-reader0-3
 
     - name: set SELinux nis_enable
       seboolean:
@@ -280,4 +285,9 @@
         state: true
         persistent: true
 
+    - name: set SELinux sync_export_all_ro
+      seboolean:
+        name: sync_export_all_ro 1
+        state: true
+        persistent: true
 
