@@ -1,0 +1,9 @@
+---
+
+hostedprojects:
+  - ubuntu-releases
+
+tls_setup: False
+site_sponsor: "OpenColo"
+site_sponsor_url: "https://opencolo.com/"
+
