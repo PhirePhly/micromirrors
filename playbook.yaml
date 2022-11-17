@@ -290,4 +290,16 @@
         name: sync_export_all_ro 1
         state: true
         persistent: true
+      when:
+        ansible_distribution != 'Fedora'
+        and
+        (
+          ansible_distribution_file_variety == 'RedHat'
+          or
+          ansible_distribution == 'CentOS'
+          or
+          ansible_distribution == 'Red Hat Enterprise Linux'
+        )
+        and
+        ansible_facts['distribution_major_version']|int == 9
 
