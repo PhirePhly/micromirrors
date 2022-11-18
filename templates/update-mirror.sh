@@ -78,10 +78,6 @@ elif [[ $1 = "rsync/$UPSTREAM/opensuse" ]]; then
 elif [[ $1 = "rsync/$UPSTREAM/raspbian" ]]; then
 	PROJECT="raspbian"
 {% endif %}
-{% if "rocky" in hostedprojects %}
-elif [[ $1 = "rsync/$UPSTREAM/rocky" ]]; then
-	PROJECT="rocky"
-{% endif %}
 {% if "rpmfusion-nonfree" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/rpmfusion" ]]; then
 	PROJECT="rpmfusion"
@@ -320,21 +316,6 @@ update_raspbian() {
 
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "raspbian" ]]; then
 	update_raspbian
-fi
-
-{% endif %}
-{% if "rocky" in hostedprojects %}
-update_rocky() {
-	exec {lock_fd}>$LOCKDIR/mirror.rocky
-	flock $FLOCK_ARGS "$lock_fd" || return
-	echo -e "\n\n### UPDATING ROCKY ###\n"
-	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/rocky/ /data/mirror/rocky/
-	sleep 10
-	flock -u "$lock_fd"
-}
-
-if [[ $PROJECT = "all" ]] || [[ $PROJECT = "rocky" ]]; then
-	update_rocky
 fi
 
 {% endif %}
