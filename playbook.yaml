@@ -146,6 +146,22 @@
         state: present
         key: https://github.com/warthog9.keys
 
+    - name: Enable sshd_config.d on EL8
+      copy:
+        src: files/sshd_config.el8
+        dest: /etc/ssh/sshd_config
+      when:
+        ansible_facts['distribution_major_version']|int == 8
+      notify:
+        - reload sshd
+
+    - name: Install sshd config snippets
+      copy:
+        src: files/sshd_config.d
+        dest: /etc/ssh/
+      notify:
+        - reload sshd
+
     - name: Configure Nginx
       template:
         src: templates/nginx.conf
