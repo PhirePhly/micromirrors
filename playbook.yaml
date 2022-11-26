@@ -162,12 +162,33 @@
       notify:
         - reload sshd
 
-    - name: Configure Nginx
+    - name: Check if TLS is already setup - ssl options
+      stat:
+        path: /etc/letsencrypt/options-ssl-nginx.conf
+      register: letsencrypt_nginx_options 
+
+    - name: Check if TLS is already setup - actual certificate
+      stat:
+        path: /etc/letsencrypt/live/{{ansible_fqdn}}/fullchain.pem
+      register: ssl_cert_fullchain
+
+    - name: Ok lets setup letsencrypt quick
+      set_fact: tls_setup=True
+
+    - name: Ok lets setup letsencrypt quick
+      set_fact: tls_setup=False
+      when:
+        not letsencrypt_nginx_options.stat.exists
+        or
+        not ssl_cert_fullchain.stat.exists
+
+    - name: Configure Nginx - NO TLS
       template:
         src: templates/nginx.conf
         dest: /etc/nginx/nginx.conf
       notify:
         - reload nginx
+      when: not tls_setup
 
     - name: Install Nginx index template
       template:
@@ -185,6 +206,30 @@
       copy:
         src: files/robots.txt
         dest: /usr/share/nginx/html/robots.txt
+
+    - name: Start NGINX without TLS
+      service:
+        name: nginx
+        state: reloaded
+        enabled: yes
+      ignore_errors: yes
+      when: not tls_setup
+
+    - name: Snag SSL cert
+      command: /usr/bin/certbot -d {{ansible_fqdn}} --nginx --non-interactive --agree-tos -m mirror@fcix.net
+      when: not tls_setup
+
+    - name: Ok lets setup letsencrypt quick
+      set_fact: tls_setup=True
+      when: not tls_setup
+
+    # run this after we've done all the bits to make this work
+    - name: Configure Nginx
+      template:
+        src: templates/nginx.conf
+        dest: /etc/nginx/nginx.conf
+      notify:
+        - reload nginx
 
     - name: Configure nftables firewall
       template:
