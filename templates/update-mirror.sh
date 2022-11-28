@@ -183,7 +183,7 @@ update_epel() {
 	exec {lock_fd}>$LOCKDIR/mirror.epel
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING EPEL ###\n"
-	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/armhfp/**' --exclude '**/aarch64/**' --exclude '**/ppc64le/**' --exclude '**/s390x/**' --exclude '**/testing/**' --exclude '**/playground/**' --exclude '**/next/**' --exclude '**/debug/**' --delete-excluded --bwlimit=25M --timeout=600 rsync://$UPSTREAM/fedora-epel/ /data/mirror/epel/
+	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/armhfp/**' --exclude '**/aarch64/**' --exclude '**/ppc64/**' --exclude '**/ppc64le/**' --exclude '**/s390x/**' --exclude '**/testing/**' --exclude '**/playground/**' --exclude '**/next/**' --exclude '**/debug/**' --delete-excluded --bwlimit=25M --timeout=600 rsync://$UPSTREAM/fedora-epel/ /data/mirror/epel/
 	sleep 10
 	flock -u "$lock_fd"
 }
