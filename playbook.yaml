@@ -169,7 +169,7 @@
 
     - name: Check if TLS is already setup - actual certificate
       stat:
-        path: /etc/letsencrypt/live/{{ansible_fqdn}}/fullchain.pem
+        path: /etc/letsencrypt/live/{{ansible_nodename}}/fullchain.pem
       register: ssl_cert_fullchain
 
     - name: Ok lets setup letsencrypt quick
@@ -216,12 +216,17 @@
       when: not tls_setup
 
     - name: Snag SSL cert
-      command: /usr/bin/certbot -d {{ansible_fqdn}} --nginx --non-interactive --agree-tos -m mirror@fcix.net
+      command: /usr/bin/certbot -d {{ansible_nodename}} --nginx --non-interactive --agree-tos -m mirror@fcix.net
       when: not tls_setup
+      ignore_errors: true
+      register: certbot_status
 
     - name: Ok lets setup letsencrypt quick
       set_fact: tls_setup=True
-      when: not tls_setup
+      when:
+        not tls_setup
+        and
+        certbot_status.rc == 0
 
     # run this after we've done all the bits to make this work
     - name: Configure Nginx
@@ -230,6 +235,7 @@
         dest: /etc/nginx/nginx.conf
       notify:
         - reload nginx
+      when: tls_setup
 
     - name: Configure nftables firewall
       template:
