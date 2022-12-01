@@ -6,6 +6,7 @@ hostedprojects:
   - centos
   - centos-stream
   - epel
+  - fdroid-repo
   - fedora-amd64
   - gimp
   - manjaro
