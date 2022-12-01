@@ -9,7 +9,6 @@ hostedprojects:
   - fedora-amd64
   - gimp
   - manjaro
-  - rocky
   - ubuntu-releases
   - videolan
 
