@@ -10,6 +10,7 @@ hostedprojects:
   - fedora-amd64
   - gimp
   - manjaro
+  - tdf
   - ubuntu-releases
   - videolan
 

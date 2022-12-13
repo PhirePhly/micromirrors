@@ -82,6 +82,10 @@ elif [[ $1 = "rsync/$UPSTREAM/raspbian" ]]; then
 elif [[ $1 = "rsync/$UPSTREAM/rpmfusion" ]]; then
 	PROJECT="rpmfusion"
 {% endif %}
+{% if "tdf" in hostedprojects %}
+elif [[ $1 = "rsync/$UPSTREAM/tdf" ]]; then
+	PROJECT="tdf"
+{% endif %}
 {% if "ubuntu-releases" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/ubuntu-releases" ]]; then
 	PROJECT="ubuntu-releases"
@@ -332,6 +336,21 @@ update_rpmfusion_nonfree() {
 
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "rpmfusion" ]]; then
 	update_rpmfusion_nonfree
+fi
+
+{% endif %}
+{% if "tdf" in hostedprojects %}
+update_tdf() {
+	exec {lock_fd}>$LOCKDIR/mirror.tdf
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING THE DOCUMENT FOUNDATION ###\n"
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/tdf-pub/ /data/mirror/tdf/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "tdf" ]]; then
+	update_tdf
 fi
 
 {% endif %}
