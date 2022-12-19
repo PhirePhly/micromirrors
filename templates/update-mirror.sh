@@ -86,6 +86,10 @@ elif [[ $1 = "rsync/$UPSTREAM/rpmfusion" ]]; then
 elif [[ $1 = "rsync/$UPSTREAM/tdf" ]]; then
 	PROJECT="tdf"
 {% endif %}
+{% if "ubuntu" in hostedprojects %}
+elif [[ $1 = "rsync/$UPSTREAM/ubuntu" ]]; then
+	PROJECT="ubuntu"
+{% endif %}
 {% if "ubuntu-releases" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/ubuntu-releases" ]]; then
 	PROJECT="ubuntu-releases"
@@ -351,6 +355,22 @@ update_tdf() {
 
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "tdf" ]]; then
 	update_tdf
+fi
+
+{% endif %}
+{% if "ubuntu" in hostedprojects %}
+update_ubuntu() {
+	exec {lock_fd}>$LOCKDIR/mirror.ubuntu
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING UBUNTU ###\n"
+	rsync  --recursive --times --links --safe-links --hard-links --stats --exclude "Packages*" --exclude "Sources*" --exclude "Release*" --exclude "InRelease" --bwlimit=25M rsync://$UPSTREAM/ubuntu/ /data/mirror/ubuntu/ &&\
+	rsync --recursive --times --links --safe-links --hard-links --stats --delete --delete-after --bwlimit=25M rsync://$UPSTREAM/ubuntu/ /data/mirror/ubuntu/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "ubuntu" ]]; then
+	update_ubuntu
 fi
 
 {% endif %}

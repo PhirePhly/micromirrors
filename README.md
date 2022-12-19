@@ -58,6 +58,7 @@ Each project has a unique workflow for registering new mirrors.
 * [OpenSUSE](https://en.opensuse.org/openSUSE:Mirror_infrastructure)
 * [RPMFusion](https://rpmfusion.org/Mirrors)
 * [[TDF](https://wiki.documentfoundation.org/Infra/Mirroring)
+* [Ubuntu](https://wiki.ubuntu.com/Mirrors)
 * [Ubuntu-releases](https://wiki.ubuntu.com/Mirrors)
 * [Videolan](https://www.videolan.org/videolan/mirrors.html)
 
