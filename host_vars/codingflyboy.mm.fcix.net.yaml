@@ -2,7 +2,7 @@
 
 hostedprojects:
   - archlinux
-  - epel
+  - epel-amd64
   - fedora-amd64
   - manjaro
   - opensuse

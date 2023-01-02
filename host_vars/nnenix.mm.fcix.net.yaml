@@ -3,7 +3,7 @@
 hostedprojects:
   - almalinux
   - centos
-  - epel
+  - epel-amd64
   - fedora-amd64
   - kdeftp-stable
   - opensuse

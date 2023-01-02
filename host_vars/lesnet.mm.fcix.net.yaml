@@ -2,7 +2,7 @@
 
 hostedprojects:
   - centos
-  - epel
+  - epel-amd64
   - fedora-amd64
   - gimp
   - ubuntu-releases

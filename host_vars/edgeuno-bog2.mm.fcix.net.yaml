@@ -5,7 +5,7 @@ hostedprojects:
   - archlinux
   - centos
   - centos-stream
-  - epel
+  - epel-amd64
   - fedora-amd64
   - gimp
   - manjaro

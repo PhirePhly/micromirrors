@@ -46,9 +46,17 @@ elif [[ $1 = "rsync/$UPSTREAM/centos-stream" ]]; then
 elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
 	PROJECT="fedora"
 {% endif %}
+{% if "epel-amd64" in hostedprojects %}
+elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
+	PROJECT="fedora"
+{% endif %}
 {% if "fdroid-repo" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/fdroid" ]]; then
 	PROJECT="fdroid"
+{% endif %}
+{% if "fedora" in hostedprojects %}
+elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
+	PROJECT="fedora"
 {% endif %}
 {% if "fedora-amd64" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
@@ -191,6 +199,21 @@ update_epel() {
 	exec {lock_fd}>$LOCKDIR/mirror.epel
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING EPEL ###\n"
+	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/s390x/**' --exclude '**/playground/**' --exclude '**/debug/**' --delete-excluded --bwlimit=25M --timeout=600 rsync://$UPSTREAM/fedora-epel/ /data/mirror/epel/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "fedora" ]]; then
+	update_epel
+fi
+
+{% endif %}
+{% if "epel-amd64" in hostedprojects %}
+update_epel() {
+	exec {lock_fd}>$LOCKDIR/mirror.epel
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING EPEL ###\n"
 	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/armhfp/**' --exclude '**/aarch64/**' --exclude '**/ppc64/**' --exclude '**/ppc64le/**' --exclude '**/s390x/**' --exclude '**/testing/**' --exclude '**/playground/**' --exclude '**/next/**' --exclude '**/debug/**' --delete-excluded --bwlimit=25M --timeout=600 rsync://$UPSTREAM/fedora-epel/ /data/mirror/epel/
 	sleep 10
 	flock -u "$lock_fd"
@@ -214,6 +237,21 @@ update_fdroid-repo() {
 
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "fdroid" ]]; then
 	update_fdroid-repo
+fi
+
+{% endif %}
+{% if "fedora" in hostedprojects %}
+update_fedora() {
+	exec {lock_fd}>$LOCKDIR/mirror.fedora
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING FEDORA AMD64 ###\n"
+	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/debug/**' --delete-excluded --bwlimit=25M --timeout=600 rsync://$UPSTREAM/fedora-enchilada0/ /data/mirror/fedora/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "fedora" ]]; then
+	update_fedora
 fi
 
 {% endif %}

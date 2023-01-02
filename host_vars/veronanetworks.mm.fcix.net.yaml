@@ -3,7 +3,7 @@
 hostedprojects:
   - centos
   - fedora-amd64
-  - epel
+  - epel-amd64
   - ubuntu-releases
   - videolan
 
