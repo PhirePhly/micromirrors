@@ -1,0 +1,12 @@
+---
+
+hostedprojects:
+  - centos-stream
+  - epel-amd64
+  - fedora-amd64
+  - ubuntu-releases
+
+tls_setup: True
+site_sponsor: "Latrobe Community Health Services"
+site_sponsor_url: "https://www.lchs.com.au/"
+
