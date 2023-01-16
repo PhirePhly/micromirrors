@@ -55,3 +55,18 @@ For Alma9, need to use udev to rename interfaces. `/etc/udev/rules.d/70-custom-i
 ```
 SUBSYSTEM=="net",ACTION=="add",ATTR{address}=="00:8c:fa:d3:6e:d7",ATTR{type}=="1",NAME="wan0"
 ```
+
+
+Hard drive partitioning
+
+```
+ignoredisk --only-use=/dev/disk/by-path/pci-0000:00:11.0-ata-2
+# Partition clearing information
+clearpart --all --initlabel --drives=/dev/disk/by-path/pci-0000:00:11.0-ata-2
+# Disk partitioning information
+part swap --fstype="swap" --ondisk=/dev/disk/by-path/pci-0000:00:11.0-ata-2 --size=2048
+part /boot --fstype="xfs" --ondisk=/dev/disk/by-path/pci-0000:00:11.0-ata-2 --size=1024
+part / --fstype="xfs" --ondisk=/dev/disk/by-path/pci-0000:00:11.0-ata-2 --size=1904056
+part /boot/efi --fstype="efi" --ondisk=/dev/disk/by-path/pci-0000:00:11.0-ata-2 --size=600 --fsoptions="umask=0077,shortname=winnt"
+```
+
