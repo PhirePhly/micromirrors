@@ -139,6 +139,7 @@ update_archlinux() {
 	exec {lock_fd}>$LOCKDIR/mirror.archlinux
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING ARCH LINUX ###\n"
+	find /data/mirror/archlinux/ -type d -name ".~tmp~" -exec rm -rf {} +
 	rsync -avSH --delete-delay --fuzzy --delay-updates --bwlimit=10M --timeout=600 rsync://$UPSTREAM/archlinux/ /data/mirror/archlinux/
 	sleep 10
 	flock -u "$lock_fd"
@@ -199,6 +200,7 @@ update_epel() {
 	exec {lock_fd}>$LOCKDIR/mirror.epel
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING EPEL ###\n"
+	find /data/mirror/epel/ -type d -name ".~tmp~" -exec rm -rf {} +
 	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/s390x/**' --exclude '**/playground/**' --exclude '**/debug/**' --delete-excluded --bwlimit=25M --timeout=600 rsync://$UPSTREAM/fedora-epel/ /data/mirror/epel/
 	sleep 10
 	flock -u "$lock_fd"
@@ -214,6 +216,7 @@ update_epel() {
 	exec {lock_fd}>$LOCKDIR/mirror.epel
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING EPEL ###\n"
+	find /data/mirror/epel/ -type d -name ".~tmp~" -exec rm -rf {} +
 	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/armhfp/**' --exclude '**/aarch64/**' --exclude '**/ppc64/**' --exclude '**/ppc64le/**' --exclude '**/s390x/**' --exclude '**/testing/**' --exclude '**/playground/**' --exclude '**/next/**' --exclude '**/debug/**' --delete-excluded --bwlimit=25M --timeout=600 rsync://$UPSTREAM/fedora-epel/ /data/mirror/epel/
 	sleep 10
 	flock -u "$lock_fd"
@@ -244,7 +247,8 @@ fi
 update_fedora() {
 	exec {lock_fd}>$LOCKDIR/mirror.fedora
 	flock $FLOCK_ARGS "$lock_fd" || return
-	echo -e "\n\n### UPDATING FEDORA AMD64 ###\n"
+	echo -e "\n\n### UPDATING FEDORA ###\n"
+	find /data/mirror/fedora/ -type d -name ".~tmp~" -exec rm -rf {} +
 	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/debug/**' --delete-excluded --bwlimit=25M --timeout=600 rsync://$UPSTREAM/fedora-enchilada0/ /data/mirror/fedora/
 	sleep 10
 	flock -u "$lock_fd"
@@ -260,6 +264,7 @@ update_fedora() {
 	exec {lock_fd}>$LOCKDIR/mirror.fedora
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING FEDORA AMD64 ###\n"
+	find /data/mirror/fedora/ -type d -name ".~tmp~" -exec rm -rf {} +
 	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/armhfp/**' --exclude '**/aarch64/**' --exclude '**/debug/**' --exclude '**/test/**' --exclude '**/testing/**' --exclude '**/Spins/**' --delete-excluded --bwlimit=25M --timeout=600 rsync://$UPSTREAM/fedora-enchilada0/ /data/mirror/fedora/
 	sleep 10
 	flock -u "$lock_fd"
@@ -322,6 +327,7 @@ update_manjaro() {
 	exec {lock_fd}>$LOCKDIR/mirror.manjaro
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING MANJARO ###\n"
+	find /data/mirror/manjaro/ -type d -name ".~tmp~" -exec rm -rf {} +
 	rsync -avSH --delete-delay --fuzzy --delay-updates --bwlimit=10M --timeout=600 rsync://$UPSTREAM/manjaro/ /data/mirror/manjaro/
 	sleep 10
 	flock -u "$lock_fd"
