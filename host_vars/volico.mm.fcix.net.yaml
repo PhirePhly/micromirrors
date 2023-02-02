@@ -1,0 +1,19 @@
+---
+
+hostedprojects:
+  - almalinux
+  - archlinux
+  - centos
+  - epel-amd64
+  - fdroid-repo
+  - fedora-amd64
+  - gimp
+  - manjaro
+  - rpmfusion-nonfree
+  - ubuntu-releases
+  - videolan
+
+tls_setup: True
+site_sponsor: "Volico"
+site_sponsor_url: "https://www.volico.com/"
+
