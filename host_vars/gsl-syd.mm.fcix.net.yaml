@@ -8,6 +8,7 @@ hostedprojects:
   - epel
   - fedora
   - manjaro
+  - rpmfusion-nonfree
   - ubuntu-releases
 
 tls_setup: True
