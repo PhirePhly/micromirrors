@@ -152,7 +152,7 @@
         </xsl:if>
       </xsl:variable>
    <tr>
-     <td class="f11"><div class="name"><a href="{$name}" title="{$name}"><xsl:value-of select="."/></a></div></td>
+     <td class="f11"><div class="name"><a href="./{$name}" title="{$name}"><xsl:value-of select="."/></a></div></td>
      <td><div class="size" title="{@size} bytes"><xsl:value-of select="$size"/></div></td>
      <td><div class="mtime">
            <xsl:value-of select="translate(date:add(@mtime,$TIMEDIFF),'TZ','  ')" />
@@ -165,7 +165,7 @@
         <xsl:value-of select="."/>
       </xsl:variable>
    <tr>
-     <td class="f11"><div class="name">&#128194;<a href="{$name}" title="{$name}/"><xsl:value-of select="."/>/</a></div></td>
+     <td class="f11"><div class="name">&#128194;<a href="./{$name}" title="{$name}/"><xsl:value-of select="."/>/</a></div></td>
      <td><div class="size"> -- </div></td>
      <td><div class="mtime"> 
            <xsl:value-of select="@mtime" />
