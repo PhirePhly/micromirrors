@@ -1,0 +1,11 @@
+---
+
+hostedprojects:
+  - epel-amd64
+  - fedora-amd64
+  - ubuntu-releases
+
+tls_setup: True
+site_sponsor: "Level66.Network"
+site_sponsor_url: "https://level66.network/"
+
