@@ -18,12 +18,13 @@ The [HP T620](https://www.parkytowers.me.uk/thin/hp/t620/) is a fanless thin cli
 
 * AMD GX-415GA quad core SOC, 1.5GHz
 * Standard 19V HP power input barrel
-* Two DDR3L PC12800 SODIMM slots
+* Two DDR3L PC12800 SODIMM slots (Maximum of 16GB supported)
 * One M.2 B key SATA slot supporting 2242, 2260, and 2280 SSDs.
 * One 1GbaseT NIC
 * Four external USB2 and two USB3 ports
 * Two internal USB ports
 * Approx 11W power consumption
+
 
 ## Provisioning Checklist
 
