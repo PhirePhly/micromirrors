@@ -29,9 +29,18 @@ The [HP T620](https://www.parkytowers.me.uk/thin/hp/t620/) is a fanless thin cli
 
 ## Provisioning Checklist
 
-Ensure BIOS is configured to power on after power loss.
+If kickstart file is used, copy the provided 'ks.cfg' file onto a FAT32 USB drive named 'OEMDRV' and insert it into the MicroMirror.
 
-Configure on-board graphics to forced 32M
+Hit F2 while booting to run through a quick memory diagnostic, also a good idea after adding any memory modules.
+Hit F10 to enter BIOS. In BIOS, hit F8 to change language as necessary.
+
+* Under the 'File' meny, load default BIOS settings to clear any previous configuration.
+* Under the 'Storage' menu, ensure the USB drive that holds the kickstart file can be seen by the BIOS.
+  * The SSD will also appear, typical WD Blue 2TB M.2 SATA drive reports as WDCWDS200T2B0B-xxxxxx   
+* Under the 'Security' menu, set Virtualization Technology to ENABLE
+* Under the 'Advanced' menu then 'Power-On Options' sub menu, set 'After Power Loss' to ON.
+* Under the 'Advanced' menu then 'Device Options' sub menu, set 'Integrated Graphics' to FORCE
+* Under the 'Advanced' menu then 'Device Options' sub menu, set 'UMA Frame Buffer Size' to 32M
 
 Assemble hardware and install Alma 8 with following settings:
 * No root user
