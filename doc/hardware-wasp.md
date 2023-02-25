@@ -5,7 +5,7 @@ Fanless mirror based on the HP T620 thin client with:
 * 2TB SSD
 * ~11W usage
 
-10"x10" by 1.5" thick
+Approx 10"x10" by 1.6" thick (25.4cm x 25.4cm x 3.81cm)
 
 ## Estimated BOM cost on eBay
 
