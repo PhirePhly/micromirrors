@@ -24,6 +24,7 @@ The [HP T620](https://www.parkytowers.me.uk/thin/hp/t620/) is a fanless thin cli
 * Four external USB2 and two USB3 ports
 * Two internal USB ports
 * Approx 11W power consumption
+* 3.0lb, ~1.36kg (excluding AC Adapter)
 
 
 ## Provisioning Checklist
