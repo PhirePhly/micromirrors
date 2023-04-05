@@ -1,0 +1,10 @@
+---
+
+hostedprojects:
+  - epel-amd64
+  - ubuntu-releases
+
+tls_setup: True
+site_sponsor: "KJSL"
+site_sponsor_url: "https://github.com/PhirePhly/micromirrors/blob/main/doc/product-brief.md"
+

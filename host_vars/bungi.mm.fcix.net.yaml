@@ -1,0 +1,10 @@
+---
+
+hostedprojects:
+  - epel-amd64
+  - ubuntu-releases
+
+tls_setup: True
+site_sponsor: "Bungi"
+site_sponsor_url: "https://www.bungi.com/"
+
