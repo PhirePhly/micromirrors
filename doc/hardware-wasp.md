@@ -70,3 +70,11 @@ part / --fstype="xfs" --ondisk=/dev/disk/by-path/pci-0000:00:11.0-ata-2 --size=1
 part /boot/efi --fstype="efi" --ondisk=/dev/disk/by-path/pci-0000:00:11.0-ata-2 --size=600 --fsoptions="umask=0077,shortname=winnt"
 ```
 
+120GB SSD
+
+```
+part /boot/efi --fstype="efi" --ondisk=sda --size=600 --fsoptions="umask=0077,shortname=winnt"
+part swap --fstype="swap" --ondisk=sda --size=2048
+part / --fstype="xfs" --ondisk=sda --size=110800
+part /boot --fstype="xfs" --ondisk=sda --size=1024
+```
