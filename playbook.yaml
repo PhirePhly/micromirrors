@@ -64,6 +64,16 @@
         and
         ansible_facts['distribution_major_version']|int == 9
 
+    - name: Enable rsync backports repo
+      ansible.builtin.yum_repository:
+        name: backports-rsync
+        description: AlmaLinux Backports - rsync
+        file: almalinux-rsync
+        baseurl: http://repo.almalinux.org/backports/$releasever/$basearch/rsync/
+        gpgcheck: yes
+        gpgkey:
+          - file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
+          - file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux-9
 
     - name: Install required software
       package:
