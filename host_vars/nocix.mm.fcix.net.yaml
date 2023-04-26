@@ -1,0 +1,9 @@
+---
+
+hostedprojects:
+  - ubuntu-releases
+
+tls_setup: True
+site_sponsor: "NOCIX"
+site_sponsor_url: "https://www.nocix.net/"
+

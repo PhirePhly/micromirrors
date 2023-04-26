@@ -102,7 +102,7 @@
    </center>
    <div style="margin-left:15px;font-size:15pt">
      <a href="https://github.com/PhirePhly/micromirrors/blob/main/doc/product-brief.md">Micro Mirrors</a> are a fleet of optimized free software mirrors that serve a small number of projects from across the Internet.<br/>
-     The hardware for these mirrors are funded by <a href="https://liberapay.com/phirephly/">donations from the community</a>, with the hosting space, power, and network connecitivty provided by the hosting sponsor linked at the top of this page.<br/>
+     The hardware for these mirrors are funded by <a href="https://liberapay.com/phirephly/">donations from the community</a>, with the hosting space, power, and network connectivity provided by the hosting sponsor linked at the top of this page.<br/>
      If you experience any technical issues with this mirror or have questions, please contact the <a href="mailto:mirror@fcix.net">FCIX Mirror Team</a>.
      The Micro Mirrors are operated by the same team with the same policies as <a href="https://mirror.fcix.net/">mirror.fcix.net</a>.
    </div>
