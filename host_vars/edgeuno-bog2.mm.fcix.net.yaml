@@ -10,6 +10,7 @@ hostedprojects:
   - gimp
   - manjaro
   - rpmfusion-nonfree
+  - tdf
   - ubuntu
   - ubuntu-releases
   - videolan

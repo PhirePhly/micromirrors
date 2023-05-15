@@ -9,6 +9,7 @@ hostedprojects:
   - fedora
   - manjaro
   - rpmfusion-nonfree
+  - tdf
   - ubuntu-releases
 
 tls_setup: True
