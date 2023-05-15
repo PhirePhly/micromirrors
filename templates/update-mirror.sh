@@ -265,7 +265,7 @@ update_fedora() {
 	flock $FLOCK_ARGS "$lock_fd" || return
 	echo -e "\n\n### UPDATING FEDORA AMD64 ###\n"
 	find /data/mirror/fedora/ -type d -name ".~tmp~" -exec rm -rf {} +
-	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/armhfp/**' --exclude '**/aarch64/**' --exclude '**/debug/**' --exclude '**/test/**' --exclude '**/testing/**' --exclude '**/Spins/**' --delete-excluded --bwlimit=25M --timeout=600 rsync://$UPSTREAM/fedora-enchilada0/ /data/mirror/fedora/
+	rsync -avSH --fuzzy --delete-delay --delay-updates --exclude '**/source/**' --exclude '**/armhfp/**' --exclude '**/aarch64/**' --exclude '**/debug/**' --exclude '**/test/**' --exclude '**/testing/**' --exclude '**/Spins/**' --exclude '**/Kinoite/**' --exclude '**/Sericea/**' --exclude '**/Silverblue/**' --delete-excluded --bwlimit=25M --timeout=600 rsync://$UPSTREAM/fedora-enchilada0/ /data/mirror/fedora/
 	sleep 10
 	flock -u "$lock_fd"
 }
