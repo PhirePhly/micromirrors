@@ -1,0 +1,11 @@
+
+module my-reader3-8 1.0;
+
+require {
+	type proc_net_t;
+	type collectd_t;
+	class lnk_file read;
+}
+
+#============= collectd_t ==============
+allow collectd_t proc_net_t:lnk_file read;
