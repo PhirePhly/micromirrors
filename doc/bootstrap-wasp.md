@@ -7,7 +7,7 @@ To begin with, ensure that you have an HP T620 with the following BIOS options s
 * Power options - power loss: on
 * On-board devices - video: forced. Video buffer: 32M
 
-The typical Wasp2T configuration is 1x4GB SODIMM of RAM and a 2TB M.2 B key WDS200T2B0B SSD
+The Wasp2T configuration is 2x4GB SODIMM of RAM and a 2TB M.2 B key WDS200T2B0B SSD
 
 You will need two additional USB flash drives and an Internet connection to download the OS during the install.
 
