@@ -1,0 +1,12 @@
+---
+
+hostedprojects:
+  - almalinux
+  - epel-amd64
+  - fedora-amd64
+  - ubuntu-releases
+
+tls_setup: True
+site_sponsor: "Divergent Networks"
+site_sponsor_url: "https://divergentnetworks.co.uk/"
+

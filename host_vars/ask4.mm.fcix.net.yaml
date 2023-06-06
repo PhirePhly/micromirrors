@@ -1,10 +1,14 @@
 ---
 
 hostedprojects:
-  - centos
+  - archlinux
   - epel-amd64
   - fedora-amd64
+  - gimp
+  - manjaro
+  - tdf
   - ubuntu-releases
+  - videolan
 
 tls_setup: True
 site_sponsor: "ASK4"
