@@ -1,7 +1,6 @@
 ---
 
 hostedprojects:
-  - centos-stream
   - epel-amd64
   - fedora-amd64
   - ubuntu-releases
