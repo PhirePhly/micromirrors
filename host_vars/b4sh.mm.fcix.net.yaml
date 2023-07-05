@@ -1,0 +1,13 @@
+---
+
+hostedprojects:
+  - almalinux
+  - epel-amd64
+  - fedora-amd64
+  - ubuntu-releases
+
+tls_setup: True
+site_sponsor: "Broadband For Surrey Hills"
+site_sponsor_url: "https://gigupanddown.net/"
+ansible_port: 7777
+
