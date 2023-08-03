@@ -135,10 +135,10 @@
       when:
         ansible_facts['distribution_major_version']|int == 9
 
-    - name: Update all software
-      dnf:
-        state: latest
-        name: "*"
+    #- name: Update all software
+    #  dnf:
+    #    state: latest
+    #    name: "*"
 
     - name: Set timezone
       timezone:
