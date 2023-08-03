@@ -2,6 +2,7 @@
 
 hostedprojects:
   - centos
+  - cvebin
   - epel-amd64
   - fedora-amd64
   - gimp

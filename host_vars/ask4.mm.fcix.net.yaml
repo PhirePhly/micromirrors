@@ -2,6 +2,7 @@
 
 hostedprojects:
   - archlinux
+  - cvebin
   - epel-amd64
   - fedora-amd64
   - gimp
@@ -13,4 +14,9 @@ hostedprojects:
 tls_setup: True
 site_sponsor: "ASK4"
 site_sponsor_url: "https://www.ask4.com/"
+
+continent: eu
+country: uk
+region:
+city:
 

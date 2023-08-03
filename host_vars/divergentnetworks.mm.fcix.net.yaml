@@ -10,3 +10,8 @@ tls_setup: True
 site_sponsor: "Divergent Networks"
 site_sponsor_url: "https://divergentnetworks.co.uk/"
 
+continent: eu
+country: uk
+region:
+city:
+

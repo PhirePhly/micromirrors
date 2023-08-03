@@ -11,3 +11,8 @@ tls_setup: True
 site_sponsor: "ABQIX - New Mexico's Internet Exchange"
 site_sponsor_url: "https://abqix.net/"
 
+continent: na
+country: us
+region: nm
+city: albuquerque
+

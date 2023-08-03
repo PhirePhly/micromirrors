@@ -42,6 +42,10 @@ elif [[ $1 = "rsync/$UPSTREAM/centos-altarch" ]]; then
 elif [[ $1 = "rsync/$UPSTREAM/centos-stream" ]]; then
 	PROJECT="centos-stream"
 {% endif %}
+{% if "cvebin" in hostedprojects %}
+elif [[ $1 = "rsync/$UPSTREAM/cvebin" ]]; then
+	PROJECT="cvebin"
+{% endif %}
 {% if "epel" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
 	PROJECT="fedora"
@@ -192,6 +196,21 @@ update_centos-stream() {
 
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "centos-stream" ]]; then
 	update_centos-stream
+fi
+
+{% endif %}
+{% if "cvebin" in hostedprojects %}
+update_cvebin() {
+	exec {lock_fd}>$LOCKDIR/mirror.cvebin
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING CVEBIN ###\n"
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/cvebin/ /data/mirror/cvebin/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "cvebin" ]]; then
+	update_cvebin
 fi
 
 {% endif %}
