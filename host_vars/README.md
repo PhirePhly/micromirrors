@@ -1,6 +1,6 @@
 ## Mirror geographical location
 
-This is a list of the approximate geogrpahical locations for each mirror and a link back to the sponsors main website:
+This is a list of the approximate geographical locations for each mirror and a link back to the sponsor’s main website:
 
   - https://abqix.mm.fcix.net - Albuquerque, New Mexico, USA. - [ABQIX](https://abqix.net)
   - https://ask4.mm.fcix.net
