@@ -6,6 +6,7 @@ hostedprojects:
   - centos
   - epel-amd64
   - fedora-amd64
+  - kali-images
   - manjaro
   - rpmfusion-nonfree
   - ubuntu-releases

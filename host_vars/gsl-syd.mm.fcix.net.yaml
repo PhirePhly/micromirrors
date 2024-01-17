@@ -6,6 +6,7 @@ hostedprojects:
   - centos
   - epel
   - fedora
+  - kali-images
   - manjaro
   - rpmfusion-nonfree
   - tdf

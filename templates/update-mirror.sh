@@ -70,6 +70,10 @@ elif [[ $1 = "rsync/$UPSTREAM/fedora" ]]; then
 elif [[ $1 = "rsync/$UPSTREAM/gimp" ]]; then
 	PROJECT="gimp"
 {% endif %}
+{% if "kali-images" in hostedprojects %}
+elif [[ $1 = "rsync/$UPSTREAM/kali-images" ]]; then
+	PROJECT="kali-images"
+{% endif %}
 {% if "kdeftp-stable" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/kde" ]]; then
 	PROJECT="kdeftp"
@@ -306,6 +310,21 @@ update_gimp() {
 
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "gimp" ]]; then
 	update_gimp
+fi
+
+{% endif %}
+{% if "kali-images" in hostedprojects %}
+update_kali_images() {
+	exec {lock_fd}>$LOCKDIR/mirror.kali-images
+	flock $FLOCK_ARGS "$lock_fd" || return
+	echo -e "\n\n### UPDATING KALI-IMAGES ###\n"
+	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/kali-images/ /data/mirror/kali-images/
+	sleep 10
+	flock -u "$lock_fd"
+}
+
+if [[ $PROJECT = "all" ]] || [[ $PROJECT = "kali-images" ]]; then
+	update_kali_images
 fi
 
 {% endif %}

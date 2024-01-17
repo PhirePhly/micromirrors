@@ -8,6 +8,7 @@ hostedprojects:
   - fdroid-repo
   - fedora-amd64
   - gimp
+  - kali-images
   - manjaro
   - rpmfusion-nonfree
   - ubuntu-releases

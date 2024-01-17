@@ -53,6 +53,7 @@ Each project has a unique workflow for registering new mirrors.
 * [EPEL](https://fedoraproject.org/wiki/Infrastructure/Mirroring)
 * [Fdroid](https://f-droid.org/docs/Running_a_Mirror/)
 * [GIMP](https://www.gimp.org/news/2021/10/06/official-mirror-policy/)
+* [Kali-images](https://www.kali.org/docs/community/setting-up-a-kali-linux-mirror/)
 * [Linux Mint](https://linuxmint.com/mirrors.php)
 * [Manjaro](https://wiki.manjaro.org/index.php/Manjaro_Mirrors) (email info@manjaro.org)
 * [OpenSUSE](https://en.opensuse.org/openSUSE:Mirror_infrastructure)
