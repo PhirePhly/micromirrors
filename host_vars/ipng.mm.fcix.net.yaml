@@ -1,8 +1,12 @@
 ---
 
 hostedprojects:
+  - archlinux
   - epel-amd64
   - fedora-amd64
+  - gimp
+  - kali-images
+  - manjaro
   - ubuntu-releases
 
 
