@@ -135,10 +135,10 @@
       when:
         ansible_facts['distribution_major_version']|int == 9
 
-    #- name: Update all software
-    #  dnf:
-    #    state: latest
-    #    name: "*"
+    - name: Update all software
+      dnf:
+        state: latest
+        name: "*"
 
     - name: Set timezone
       timezone:
@@ -335,6 +335,18 @@
     - name: Enable LLDP
       service:
         name: lldpd
+        state: started
+        enabled: yes
+
+    - name: Install chronyd config file
+      copy:
+        src: files/chrony.conf
+        dest: /etc/chrony.conf
+      notify: restart chrony
+
+    - name: Enable chronyd service
+      systemd:
+        name: chronyd.service
         state: started
         enabled: yes
 
