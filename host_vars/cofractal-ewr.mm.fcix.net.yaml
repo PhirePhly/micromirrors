@@ -1,0 +1,16 @@
+---
+
+hostedprojects:
+  - almalinux
+  - archlinux
+  - epel-amd64
+  - fedora-amd64
+  - gimp
+  - manjaro
+  - ubuntu-releases
+  - videolan
+
+tls_setup: True
+site_sponsor: "Cofractal, Inc"
+site_sponsor_url: "https://ziplyfiber.com/"
+
