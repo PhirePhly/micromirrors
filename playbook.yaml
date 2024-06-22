@@ -144,17 +144,18 @@
       timezone:
         name: America/Los_Angeles
 
-    - name: Install KWF SSH keys
+    - name: Install SSH keys
       authorized_key:
         user: mirror
         state: present
-        key: https://github.com/phirephly.keys
-
-    - name: Install Johns SSH keys
-      authorized_key:
-        user: mirror
-        state: present
-        key: https://github.com/warthog9.keys
+        key: '{{ main_ssh_keys }}'
+      loop_control:
+        loop_var: main_ssh_keys
+      loop:
+      with_items:
+        - https://github.com/phirephly.keys
+        - https://github.com/warthog9.keys
+        - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDbALSrSqVWdZfxIkUv7aSX4c1Qd96bFED3JyPv7fx2O Warthog9gandalfWSL"
 
     - name: Enable sshd_config.d on EL8
       copy:
@@ -359,14 +360,16 @@
         name: mwojtowicz.semodule
         tasks_from: semodule.yml
       vars:
-        selinux_module: "{{ item }}"
-      with_items:
-          - my-nginx
-          - my-f2bfsshd2
-          - my-grep
-          - my-reader3-6
-          - my-reader3-7
-          - my-reader0-3
+        selinux_module: "{{ main_selinux_modules }}"
+      loop_control:
+        loop_var: main_selinux_modules
+      loop:
+        - my-nginx
+        - my-f2bfsshd2
+        - my-grep
+        - my-reader3-6
+        - my-reader3-7
+        - my-reader0-3
 
     - name: set SELinux nis_enable
       seboolean:
