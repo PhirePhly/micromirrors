@@ -58,33 +58,35 @@
         name: mwojtowicz.semodule
         tasks_from: semodule.yml
       vars:
-        selinux_module: "{{ item }}"
-      with_items:
-          - my-nginx
-          - my-rsyslogd
-          - my-collectd
-          - my-collectd-1
-          - my-collectd-2
-          - my-collectd-3
-          - my-collectd-4
-          - my-reader0
-          - my-reader0-1
-          - my-reader0-2
-          - my-reader1
-          - my-reader1-1
-          - my-reader1-2
-          - my-reader2
-          - my-reader2-1
-          - my-reader3
-          - my-reader3-2
-          - my-reader3-3
-          - my-reader3-4
-          - my-reader3-5
-          - my-reader3-6
-          - my-reader3-7
-          - my-reader3-8
-          - my-reader4
-          - my-reader4-1
+        selinux_module: "{{ metrics_module_templates }}"
+      loop_control:
+        loop_var: metrics_module_templates
+      loop:
+        - my-nginx
+        - my-rsyslogd
+        - my-collectd
+        - my-collectd-1
+        - my-collectd-2
+        - my-collectd-3
+        - my-collectd-4
+        - my-reader0
+        - my-reader0-1
+        - my-reader0-2
+        - my-reader1
+        - my-reader1-1
+        - my-reader1-2
+        - my-reader2
+        - my-reader2-1
+        - my-reader3
+        - my-reader3-2
+        - my-reader3-3
+        - my-reader3-4
+        - my-reader3-5
+        - my-reader3-6
+        - my-reader3-7
+        - my-reader3-8
+        - my-reader4
+        - my-reader4-1
 
     - name: Metrics- selinux - enable logging to non-security directories
       seboolean:
@@ -156,9 +158,11 @@
 
     - name: Collectd- remove ipmi, we don't have it
       file:
-        path: "{{ item }}"
+        path: "{{ metrics_collected_config_removals }}"
         state: absent
-      with_items:
-          - "/etc/collectd.d/ipmi.conf"
+      loop_control:
+        loop_var: metrics_collected_config_removals
+      loop:
+        - "/etc/collectd.d/ipmi.conf"
       notify:
         - Restart collectd
