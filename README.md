@@ -47,9 +47,6 @@ Each project has a unique workflow for registering new mirrors.
 
 * [Almalinux](https://wiki.almalinux.org/Mirrors.html)
 * [ArchLinux](https://wiki.archlinux.org/title/DeveloperWiki:NewMirrors)
-* [CentOS](https://wiki.centos.org/HowTos/CreatePublicMirrors)
-* [CentOS-altarch](https://wiki.centos.org/HowTos/CreatePublicMirrors)
-* [CentOS-Stream](https://wiki.centos.org/HowTos/CreatePublicMirrors)
 * [EPEL](https://fedoraproject.org/wiki/Infrastructure/Mirroring)
 * [Fdroid](https://f-droid.org/docs/Running_a_Mirror/)
 * [GIMP](https://www.gimp.org/news/2021/10/06/official-mirror-policy/)

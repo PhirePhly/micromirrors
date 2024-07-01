@@ -30,18 +30,6 @@ elif [[ $1 = "rsync/$UPSTREAM/almalinux" ]]; then
 elif [[ $1 = "rsync/$UPSTREAM/archlinux" ]]; then
 	PROJECT="archlinux"
 {% endif %}
-{% if "centos" in hostedprojects %}
-elif [[ $1 = "rsync/$UPSTREAM/centos" ]]; then
-	PROJECT="centos"
-{% endif %}
-{% if "centos-altarch" in hostedprojects %}
-elif [[ $1 = "rsync/$UPSTREAM/centos-altarch" ]]; then
-	PROJECT="centos-altarch"
-{% endif %}
-{% if "centos-stream" in hostedprojects %}
-elif [[ $1 = "rsync/$UPSTREAM/centos-stream" ]]; then
-	PROJECT="centos-stream"
-{% endif %}
 {% if "cvebin" in hostedprojects %}
 elif [[ $1 = "rsync/$UPSTREAM/cvebin" ]]; then
 	PROJECT="cvebin"
@@ -155,51 +143,6 @@ update_archlinux() {
 
 if [[ $PROJECT = "all" ]] || [[ $PROJECT = "archlinux" ]]; then
 	update_archlinux
-fi
-
-{% endif %}
-{% if "centos" in hostedprojects %}
-update_centos() {
-	exec {lock_fd}>$LOCKDIR/mirror.centos
-	flock $FLOCK_ARGS "$lock_fd" || return
-	echo -e "\n\n### UPDATING CENTOS ###\n"
-	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/centos/ /data/mirror/centos/
-	sleep 10
-	flock -u "$lock_fd"
-}
-
-if [[ $PROJECT = "all" ]] || [[ $PROJECT = "centos" ]]; then
-	update_centos
-fi
-
-{% endif %}
-{% if "centos-altarch" in hostedprojects %}
-update_centos-altarch() {
-	exec {lock_fd}>$LOCKDIR/mirror.centos-altarch
-	flock $FLOCK_ARGS "$lock_fd" || return
-	echo -e "\n\n### UPDATING CENTOS ALTARCH ###\n"
-	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/centos-altarch/ /data/mirror/centos-altarch/
-	sleep 10
-	flock -u "$lock_fd"
-}
-
-if [[ $PROJECT = "all" ]] || [[ $PROJECT = "centos-altarch" ]]; then
-	update_centos-altarch
-fi
-
-{% endif %}
-{% if "centos-stream" in hostedprojects %}
-update_centos-stream() {
-	exec {lock_fd}>$LOCKDIR/mirror.centos-stream
-	flock $FLOCK_ARGS "$lock_fd" || return
-	echo -e "\n\n### UPDATING CENTOS STREAM ###\n"
-	rsync "${RSYNC_ARGS[@]}" rsync://$UPSTREAM/centos-stream/ /data/mirror/centos-stream/
-	sleep 10
-	flock -u "$lock_fd"
-}
-
-if [[ $PROJECT = "all" ]] || [[ $PROJECT = "centos-stream" ]]; then
-	update_centos-stream
 fi
 
 {% endif %}

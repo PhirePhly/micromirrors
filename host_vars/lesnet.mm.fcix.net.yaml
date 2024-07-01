@@ -1,7 +1,7 @@
 ---
 
 hostedprojects:
-  - centos
+  - almalinux
   - cvebin
   - epel-amd64
   - fedora-amd64

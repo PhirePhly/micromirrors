@@ -1,8 +1,8 @@
 ---
 
 hostedprojects:
+  - almalinux
   - archlinux
-  - centos
   - fedora-amd64
   - manjaro
   - ubuntu-releases

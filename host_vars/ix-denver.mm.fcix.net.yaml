@@ -1,7 +1,7 @@
 ---
 
 hostedprojects:
-  - centos
+  - almalinux
   - epel-amd64
   - fedora-amd64
   - ubuntu-releases

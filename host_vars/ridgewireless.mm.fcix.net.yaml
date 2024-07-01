@@ -1,8 +1,8 @@
 ---
 
 hostedprojects:
+  - almalinux
   - archlinux
-  - centos
   - epel-amd64
   - fedora-amd64
   - kdeftp-stable

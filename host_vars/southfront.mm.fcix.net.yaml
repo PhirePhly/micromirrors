@@ -3,7 +3,6 @@
 hostedprojects:
   - almalinux
   - archlinux
-  - centos
   - epel-amd64
   - fdroid-repo
   - fedora-amd64
