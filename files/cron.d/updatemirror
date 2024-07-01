@@ -1,5 +1,3 @@
 
 59 1 * * *	mirror	/usr/local/bin/update-mirror.sh
 
-30 3 1 * *	root	/usr/sbin/duperemove -dr --io-threads=1 --cpu-threads=1 /data >/var/log/duperemove.log
-
