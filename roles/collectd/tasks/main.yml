@@ -182,7 +182,7 @@
   debug:
     msg: "{{ collectd_server }} | {{ ansible_fqdn }}"
   when:
-    "'{{ collectd_server }}' != '{{ ansible_fqdn }}'"
+    collectd_server != ansible_fqdn
 
 - name: Remove server config if we aren't the server
   file:
