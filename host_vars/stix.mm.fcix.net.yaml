@@ -1,0 +1,16 @@
+---
+
+hostedprojects:
+  - almalinux
+  - archlinux
+  - epel-amd64
+  - fedora-amd64
+  - gimp
+  - manjaro
+  - ubuntu-releases
+  - videolan
+
+tls_setup: True
+site_sponsor: "STIX.DO"
+site_sponsor_url: "https://stix.do/"
+
