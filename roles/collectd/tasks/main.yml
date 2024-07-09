@@ -192,7 +192,7 @@
       - "{{ collectd_dir_path }}/network.conf"
       - "{{ collectd_dir_path }}/server.conf"
   when:
-    "'{{ collectd_server }}' != '{{ ansible_fqdn }}'"
+    collectd_server != ansible_fqdn
   notify:
     - Restart collectd
 
