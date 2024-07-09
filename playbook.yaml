@@ -83,6 +83,7 @@
           - certbot
           - cockpit
           - cockpit-ws
+          - dnf-automatic
           - dstat
           - duperemove
           - gnutls
@@ -382,3 +383,19 @@
         name: rsync_export_all_ro
         state: true
         persistent: true
+
+    - name: Copy Automatic update config
+      copy:
+        src: files/dnf-automatic.conf
+        dest: /etc/dnf/automatic.conf
+        mode: '0644'
+        owner: root
+        group: root
+
+    - name: Ensure Automatic Updates are enabled
+      systemd:
+        name: dnf-automatic.timer
+        state: started
+        enabled: yes
+        
+
