@@ -7,6 +7,7 @@ hostedprojects:
   - fedora
   - kali-images
   - manjaro
+  - opensuse
   - rpmfusion-nonfree
   - tdf
   - ubuntu-releases

@@ -3,6 +3,7 @@
 hostedprojects:
   - epel-amd64
   - fedora-amd64
+  - opensuse
   - ubuntu-releases
 
 tls_setup: True
