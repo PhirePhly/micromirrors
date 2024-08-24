@@ -3,18 +3,20 @@
 hostedprojects:
   - almalinux
   - archlinux
+  - epel-amd64
   - fedora-amd64
+  - gimp
   - manjaro
   - ubuntu-releases
+  - videolan
 
 tls_setup: True
-disableDSCP: True
-site_sponsor: "CoreSite"
-site_sponsor_url: "https://www.coresite.com/"
+site_sponsor: "Cofractal, Inc"
+site_sponsor_url: "https://cloud.cofractal.com/"
 
 geolocation:
   continent: North America
   country: US
-  state_province: Georgia
-  city: Atlanta
+  state_province: Washington
+  city: Seattle
 

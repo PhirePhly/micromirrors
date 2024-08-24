@@ -1,0 +1,18 @@
+---
+
+hostedprojects:
+  - almalinux
+  - epel-amd64
+  - fedora-amd64
+  - ubuntu-releases
+
+tls_setup: True
+site_sponsor: "Ryamer, LLC"
+site_sponsor_url: "https://ryamer.com/"
+
+geolocation:
+  continent: North America
+  country: US
+  state_province: Illinois
+  city: Chicago
+
