@@ -12,8 +12,8 @@ site_sponsor: "Broadband For Surrey Hills"
 site_sponsor_url: "https://gigupanddown.net/"
 ansible_port: 7777
 
-continent: eu
-country: uk
-region:
-city:
-
+geolocation:
+  continent: Europe
+  country: GB
+  state_province: Surrey
+  city: Guildford
