@@ -14,3 +14,9 @@ tls_setup: True
 site_sponsor: "Ridge Wireless"
 site_sponsor_url: "https://ridgewireless.net/"
 
+geolocation:
+  continent: North America
+  country: US
+  state_province: California
+  city: Santa Clara
+

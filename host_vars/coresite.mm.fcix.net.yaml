@@ -12,3 +12,9 @@ disableDSCP: True
 site_sponsor: "CoreSite"
 site_sponsor_url: "https://www.coresite.com/"
 
+geolocation:
+  continent: North America
+  country: US
+  state_province: Virginia
+  city: Ashburn
+

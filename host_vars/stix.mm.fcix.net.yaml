@@ -14,3 +14,9 @@ tls_setup: True
 site_sponsor: "STIX.DO"
 site_sponsor_url: "https://stix.do/"
 
+geolocation:
+  continent: North America
+  country: DO
+  state_province: La Vega
+  city: La Vega
+

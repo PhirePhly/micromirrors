@@ -16,3 +16,9 @@ tls_setup: True
 site_sponsor: "Fork Systems"
 site_sponsor_url: "http://forksystems.net/"
 
+geolocation:
+  continent: North America
+  country: US
+  state_province: Virginia
+  city: Ashburn
+

@@ -19,3 +19,9 @@ tls_setup: True
 site_sponsor: "EdgeUno"
 site_sponsor_url: "https://edgeuno.com/"
 
+geolocation:
+  continent: South America
+  country: CO
+  state_province: Bogota
+  city: Bogota
+

@@ -17,3 +17,9 @@ tls_setup: True
 site_sponsor: "The University of Vermont Network Services"
 site_sponsor_url: "https://www.uvm.edu/telcom/"
 
+geolocation:
+  continent: North America
+  country: US
+  state_province: Vermont
+  city: Burlington
+

@@ -14,3 +14,9 @@ tls_setup: True
 site_sponsor: "IPng Networks"
 site_sponsor_url: "https://ipng.ch/"
 
+geolocation:
+  continent: Europe
+  country: CH
+  state_province: Zurich
+  city: Zurich
+

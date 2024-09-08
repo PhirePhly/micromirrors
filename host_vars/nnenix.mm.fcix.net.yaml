@@ -14,3 +14,9 @@ tls_setup: True
 site_sponsor: "NNENIX"
 site_sponsor_url: "https://www.nnenix.net/"
 
+geolocation:
+  continent: North America
+  country: US
+  state_province: Maine
+  city: Orono
+

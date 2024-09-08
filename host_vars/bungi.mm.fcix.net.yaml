@@ -8,3 +8,9 @@ tls_setup: True
 site_sponsor: "Bungi"
 site_sponsor_url: "https://www.bungi.com/"
 
+geolocation:
+  continent: North America
+  country: US
+  state_province: California
+  city: Fremont
+

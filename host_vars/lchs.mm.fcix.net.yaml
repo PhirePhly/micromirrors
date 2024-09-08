@@ -9,3 +9,9 @@ tls_setup: True
 site_sponsor: "Latrobe Community Health Services"
 site_sponsor_url: "https://www.lchs.com.au/"
 
+geolocation:
+  continent: Australia
+  country: AU
+  state_province: Victoria
+  city: Melbourne
+

@@ -11,3 +11,9 @@ tls_setup: True
 site_sponsor: "Verona Networks"
 site_sponsor_url: "https://www.vntx.net/"
 
+geolocation:
+  continent: North America
+  country: US
+  state_province: Texas
+  city: Blue Ridge
+
