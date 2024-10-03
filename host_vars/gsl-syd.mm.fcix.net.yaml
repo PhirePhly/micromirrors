@@ -5,6 +5,7 @@ hostedprojects:
   - archlinux
   - epel
   - fedora
+  - gimp
   - kali-images
   - manjaro
   - opensuse
