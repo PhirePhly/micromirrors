@@ -9,6 +9,8 @@ layout: home
 
 The MicroMirror CDN is a volunteer run, community funded, project where we are adding download mirror capacity for free software projects by deploying managed download mirrors to ISPs and data centers willing to donate the space and transit needed for the servers.
 
+![National Map](./map.jpg)
+
 [Blog post about the project](https://blog.thelifeofkenneth.com/2023/05/building-micro-mirror-free-software-cdn.html)
 
 [LiberaPay to donate to the project](https://en.liberapay.com/phirephly/)
