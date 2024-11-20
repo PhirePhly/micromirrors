@@ -2,10 +2,8 @@
 
 hostedprojects:
   - almalinux
-  - archlinux
   - epel-amd64
   - fedora-amd64
-  - manjaro
   - ubuntu-releases
 
 tls_setup: True
