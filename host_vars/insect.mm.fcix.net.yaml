@@ -1,0 +1,22 @@
+---
+
+hostedprojects:
+  - almalinux
+  - archlinux
+  - epel-amd64
+  - fedora-amd64
+  - gimp
+  - manjaro
+  - ubuntu-releases
+  - videolan
+
+tls_setup: True
+site_sponsor: "Terminix of NC/SEVA"
+site_sponsor_url: "https://insect.com/"
+
+geolocation:
+  continent: North America
+  country: US
+  state_province: North Carolina
+  city: Fayetteville
+

@@ -7,6 +7,7 @@ hostedprojects:
   - gimp
   - kali-images
   - manjaro
+  - rpmfusion-nonfree
   - ubuntu-releases
 
 
