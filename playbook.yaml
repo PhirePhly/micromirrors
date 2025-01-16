@@ -90,6 +90,7 @@
           - lldpd
           - mosquitto
           - net-tools
+          - pciutils
           - postfix
           - python3-certbot-nginx
           - python3-policycoreutils
