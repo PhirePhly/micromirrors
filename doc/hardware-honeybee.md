@@ -15,6 +15,7 @@ CPU: [AMD Ryzen V1756B](https://www.cpubenchmark.net/cpu.php?cpu=AMD+Ryzen+Embed
 * HP T740 plus power supply (eBay, ~$100)
 * 2x4GB DDR4 SODIMM ([Amazon](https://amzn.to/3WPiy9x), )
 * ConnectX-3 2x10G NIC `MCX312A-XCBT` (eBay, ~$25)
+** PSID MT_1080120023 firmware 2.42.5000
 * USB Flash Drive, 16GB, low profile ([Amazon](https://amzn.to/4hJZy4R), ~$10)
 * 4TB NVMe SSD ([Amazon](https://amzn.to/4hui9BE), ~$250)
 
@@ -22,13 +23,20 @@ CPU: [AMD Ryzen V1756B](https://www.cpubenchmark.net/cpu.php?cpu=AMD+Ryzen+Embed
 
 NIC locations for wan0 port channel
 
-* 1GbaseT on-board: ???
-* 2x10G CX312 ports: ???
+* 1GbaseT on-board: enp2s0f0
+* 2x10G CX312 ports: enp1s0, enp1s0d1
 
 NVMe path for kickstart file:
 
 ```
-TODO
+ignoredisk --only-use=nvme0n1
+# Partition clearing information
+clearpart --none --initlabel
+# Disk partitioning information
+part swap --fstype="swap" --ondisk=nvme0n1 --size=7043
+part /boot --fstype="xfs" --ondisk=nvme0n1 --size=1024
+part /boot/efi --fstype="efi" --noformat --fsoptions="umask=0077,shortname=winnt"
+part / --fstype="xfs" --ondisk=nvme0n1 --grow
 ```
 
 ## Benchmarking notes
