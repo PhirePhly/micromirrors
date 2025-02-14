@@ -1,7 +1,6 @@
 ---
 
 hostedprojects:
-  - almalinux
   - archlinux
   - epel-amd64
   - fedora-amd64

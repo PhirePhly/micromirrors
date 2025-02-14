@@ -1,7 +1,6 @@
 ---
 
 hostedprojects:
-  - almalinux
   - archlinux
   - fedora-amd64
   - manjaro

@@ -1,7 +1,6 @@
 ---
 
 hostedprojects:
-  - almalinux
   - epel-amd64
   - gimp
   - fedora-amd64
