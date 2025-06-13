@@ -1,0 +1,17 @@
+---
+
+hostedprojects:
+  - almalinux
+  - archlinux
+  - epel-amd64
+  - fdroid-repo
+  - fedora-amd64
+  - gimp
+  - manjaro
+  - ubuntu-releases
+  - videolan
+
+tls_setup: True
+site_sponsor: "GigSouth"
+site_sponsor_url: "https://gigsouth.com/"
+
