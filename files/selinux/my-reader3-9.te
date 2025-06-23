@@ -1,0 +1,15 @@
+
+module my-reader3 1.0;
+
+require {
+	type collectd_t;
+	type fixed_disk_device_t;
+	class blk_file write;
+	class capability sys_admin;
+}
+
+#============= collectd_t ==============
+
+#!!!! This avc is allowed in the current policy
+allow collectd_t fixed_disk_device_t:blk_file write;
+allow collectd_t self:capability sys_admin;

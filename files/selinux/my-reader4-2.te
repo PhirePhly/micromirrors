@@ -1,0 +1,11 @@
+
+module my-reader4 1.0;
+
+require {
+	type collectd_t;
+	type fixed_disk_device_t;
+	class blk_file write;
+}
+
+#============= collectd_t ==============
+allow collectd_t fixed_disk_device_t:blk_file write;
