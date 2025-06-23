@@ -15,3 +15,9 @@ tls_setup: True
 site_sponsor: "GigSouth"
 site_sponsor_url: "https://gigsouth.com/"
 
+geolocation:
+  continent: North America
+  country: US
+  state_province: Georgia
+  city: Atlanta
+
