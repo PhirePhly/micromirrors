@@ -4,7 +4,6 @@ hostedprojects:
   - almalinux
   - archlinux
   - epel-amd64
-  - fdroid-repo
   - fedora-amd64
   - gimp
   - manjaro
