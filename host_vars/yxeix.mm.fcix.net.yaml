@@ -1,0 +1,22 @@
+---
+
+hostedprojects:
+  - almalinux
+  - archlinux
+  - epel-amd64
+  - fedora-amd64
+  - gimp
+  - manjaro
+  - ubuntu-releases
+  - videolan
+
+tls_setup: True
+site_sponsor: "Saskatoon Internet Exchange"
+site_sponsor_url: "https://yxeix.ca/"
+
+geolocation:
+  continent: North America
+  country: CA
+  state_province: Saskatchewan
+  city: Saskatoon
+
