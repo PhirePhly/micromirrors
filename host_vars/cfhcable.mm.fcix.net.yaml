@@ -1,0 +1,22 @@
+---
+
+hostedprojects:
+  - almalinux
+  - archlinux
+  - epel-amd64
+  - fedora-amd64
+  - gimp
+  - manjaro
+  - ubuntu-releases
+  - videolan
+
+tls_setup: True
+site_sponsor: "CFH Cable Inc"
+site_sponsor_url: "https://cfhcable.com/"
+
+geolocation:
+  continent: North America
+  country: US
+  state_province: Florida
+  city: Tampa
+
